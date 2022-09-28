@@ -1,0 +1,36 @@
+body {
+    background-color: var(--bs-cultured);
+    font-family: 'Roboto', sans-serif;
+
+}
+
+h1 {
+    color: var(--bs-independence);
+    font-family: var(--bs-font-family);
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    background-color: var(--bs-cultured);
+}
+
+#btn-login {
+    background-color: var(--bs-independence);
+    width: 200px;
+}
+
+#a-register {
+    text-decoration: underline;
+    display: block;
+    color: var(--bs-independence);
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
