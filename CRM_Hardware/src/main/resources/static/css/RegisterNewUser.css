@@ -1,0 +1,35 @@
+/* Esta parte es para la vista de register new user */
+input {
+    background-color: var(--bs-cultured);
+}
+
+#btn-login {
+    background-color: var(--bs-independence);
+    width: 200px;
+}
+
+#btn-login {
+    background-color: var(--bs-cultured);
+    width: 200px;
+}
+.btnRegister{
+    background-color: #384A65;
+    color:white;
+    width: 200px;
+}
+.btnBack{
+    background-color: #384A65;
+    color:white;
+    border-radius: 60%;
+    margin-top: 8px;
+}
+.divRegisterAndBack{
+    display: inline;
+    display: table-caption;
+}
+
+@media (max-width: 860px) {
+    .imgRegisterNewUser{
+        display: none;
+    }
+  }
