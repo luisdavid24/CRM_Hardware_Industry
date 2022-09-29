@@ -1,0 +1,33 @@
+body{
+  font-family: var(--font-family-roboto);
+}
+
+
+.company-info p{
+  color: var(--purple);
+}
+
+.slogan h2{
+  color: #000;
+}
+
+.slogan img{
+  width: 70px;
+  height: auto;
+}
+
+.slogan p {
+  font-size: 50px;
+}
+
+.slogan{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.img-container{
+  display: flex;
+  align-items: center;  
+}
