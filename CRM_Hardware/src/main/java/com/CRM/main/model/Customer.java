@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.CRM.main.Models;
+package com.CRM.main.model;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,25 +13,25 @@ import lombok.Setter;
  */
 
 @Entity
-@Table (name = "Clientes")
-public class Clientes {
+@Table (name = "customers")
+public class Customer {
     
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @Getter @Setter
-    private int Id;
+    private int id;
     
-    @Column(name = "Name")
+    @Column(name = "name")
     @Getter @Setter
-    private String Name;
+    private String name;
     
 
-    @Column(name = "Email")
+    @Column(name = "email")
     @Getter @Setter
-    private String Email;
+    private String email;
     
-    @Column(name = "Phone")
+    @Column(name = "phone")
     @Getter @Setter
-    private String Phone;
+    private String phone;
     
 }
