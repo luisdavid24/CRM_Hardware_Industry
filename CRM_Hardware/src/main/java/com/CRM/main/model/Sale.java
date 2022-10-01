@@ -7,6 +7,8 @@ package com.CRM.main.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -18,28 +20,29 @@ import lombok.Setter;
  */
 
 @Entity
-@Table (name = "sale")
+@Table (name = "sales")
 public class Sale {
     
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "IdSale")
     @Getter @Setter
     private int id;
     
-    @Column(name = "date")
+    @Column(name = "Date")
     @Getter @Setter
     private Date date;
     
     
-    @Column(name = "productCode")
+    @Column(name = "ProductCode")
     @Getter @Setter
     private String productCode;
     
-    @Column(name = "units")
+    @Column(name = "Units")
     @Getter @Setter
     private int units;
     
-    @Column(name = "value")
+    @Column(name = "Value")
     @Getter @Setter
     private int value;
     
