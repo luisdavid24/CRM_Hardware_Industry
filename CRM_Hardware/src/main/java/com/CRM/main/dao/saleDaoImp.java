@@ -26,19 +26,23 @@ public class saleDaoImp implements saleDao{
     
     /*@Override  me esta tirando error con esto, no se porque*/
     
-    public List<Sale> getUsers() {
-        String query = "select id,name, last_name ,email,password, phone from Usuario";
+    
+    /*
+    public List<Sale> getSale() {
+        String query = "select id_sale,date,product_code,units,value from sales";
 
         return entityManager.createQuery(query).getResultList();
-    }
-    @Override
-    public List<Sale> getSale() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    }*/
     
+    @Transactional
+    public List<Sale> getSale() {
+        String query = "FROM Sale";
+        return entityManager.createQuery(query).getResultList();
+    }
+   
     @Override
      public List<Sale> getSale(int id1){
-        String query = "select id, name, last_name, email, password, phone from Usuario where id =" + id1;
+        String query = "select id_sale,date,product_code,units,value from sales where id =" + id1;
         return entityManager.createQuery(query).getResultList();
     }
     
@@ -50,20 +54,27 @@ public class saleDaoImp implements saleDao{
         entityManager.remove(sale);
     }
     
+    /*insertar nuevos objetos */
     @Override
     public void regSale(Sale sale) {
         entityManager.merge(sale);
     }
     
+   
+
+    
     @Override
     public void modUser(Sale sale, int id) {
         Sale temp = entityManager.find(Sale.class, id);
         temp.setDate(temp.getDate());
-        temp.setProductCode(temp.getProductCode());
+        temp.setProduct_code(temp.getProduct_code());
         temp.setUnits(temp.getUnits());
         temp.setValue(temp.getValue());
         entityManager.merge(temp);
     }
+    
+    
+    
     
     
     

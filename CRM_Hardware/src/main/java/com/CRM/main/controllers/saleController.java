@@ -31,9 +31,13 @@ public class saleController {
     @Autowired
     private JWTUtil jwtUtil;*/
     
-    @RequestMapping(value = "sale/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "api/sale/{id}", method = RequestMethod.GET)
     public List<Sale> getSale(@PathVariable int id){
         return saleDAO.getSale(id);
+    }
+    @RequestMapping(value = "api/sale", method = RequestMethod.GET)
+    public List<Sale> getSale() {
+       return saleDAO.getSale();
     }
     
     /*
@@ -45,14 +49,25 @@ public class saleController {
         }
         return userDAO.getUsers();
     }*/
-    @RequestMapping(value = "sale", method = RequestMethod.POST)
+    
+    @RequestMapping(value = "api/sale", method = RequestMethod.POST)
     public void registerSale(@RequestBody Sale sale){ //Transforma json en un Usuario
         saleDAO.regSale(sale);
     }
     
-    @RequestMapping(value = "sale", method = RequestMethod.DELETE)
-    public void deleteUser(@RequestHeader(value = "Authorization") String token,@PathVariable int id){
+    @RequestMapping(value = "api/sale/{id}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable int id){
         saleDAO.delete(id);
     }
+    
+    
+    
+    
+    @RequestMapping(value = "api/sale/{id}", method = RequestMethod.PUT)
+    public void modUser(@RequestBody Sale sale,@PathVariable int id){ //Transforma json en un Usuario
+       saleDAO.modUser(sale, id);
+    }
+    
+    
     
 }

@@ -25,25 +25,25 @@ public class Sale {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "IdSale")
+    @Column(name = "id_sale")
     @Getter @Setter
     private int id;
     
-    @Column(name = "Date")
+    @Column(name = "date")
     @Getter @Setter
     private Date date;
     
     
-    @Column(name = "ProductCode")
+    @Column(name = "product_code")
     @Getter @Setter
-    private String productCode;
+    private String product_code;
     
-    @Column(name = "Units")
+    @Column(name = "units")
     @Getter @Setter
     private int units;
     
-    @Column(name = "Value")
+    @Column(name = "value")
     @Getter @Setter
     private int value;
-    
+   
 }
