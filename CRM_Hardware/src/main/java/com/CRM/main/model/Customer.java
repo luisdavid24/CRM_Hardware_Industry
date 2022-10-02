@@ -6,6 +6,7 @@ package com.CRM.main.model;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -14,6 +15,7 @@ import lombok.Setter;
 
 @Entity
 @Table (name = "customers")
+@ToString
 public class Customer {
     
     @Id
