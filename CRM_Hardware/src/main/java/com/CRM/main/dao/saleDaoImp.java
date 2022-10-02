@@ -65,53 +65,6 @@ public class saleDaoImp implements saleDao{
         entityManager.merge(temp);
     }
     
-    /* PARA QUE ES ESTO
-    @Override
-    public boolean verifyUser(Sale sale) {
-
-        String query = "SELECT u FROM Usuario u WHERE u.email = :email";
-
-       ArrayList<Sale> list = (ArrayList<Sale>) entityManager.createQuery(query)
-                .setParameter("email", sale.getEmail())
-                .getResultList();
-
-        String passHashed = list.get(0).getPassword();
-        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
-
-        System.out.println(argon2.verify(passHashed,user.getPassword()));
-        return argon2.verify(passHashed,user.getPassword());
-          
-    }
-    */
-    
-    
-    /* PARA QUE ES ESTO
-    @Override
-    public Sale getSalByCr(Sale sale) {
-        String query = "SELECT u FROM Usuario u WHERE u.email = :email";
-
-        ArrayList<Sale> list = (ArrayList<Sale>) entityManager.createQuery(query)
-                .setParameter("email", user.getEmail())
-                .getResultList();
-
-        if(list.isEmpty()){
-            return null;
-        }
-
-        String passHashed = list.get(0).getPassword();
-        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
-
-        if(argon2.verify(passHashed,user.getPassword())){
-            return list.get(0);
-        };
-
-        return null;
-    }
-      */
-
-    
-    
-
     
     
 }

@@ -21,13 +21,7 @@ public interface saleDao{
 
     void modUser(Sale sale, int id);
 
-    /* PARA QUE ESTA COSA
-    boolean verifyUser(Sale sale);
-    */
-    
-    /* PARA QUE ESTA COSA
-    Sale getSaleByCr(Sale sale);
-    */
+ 
     
     List<Sale> getSale(int id);
 }
