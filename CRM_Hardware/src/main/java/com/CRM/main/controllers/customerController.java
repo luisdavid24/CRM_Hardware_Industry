@@ -26,7 +26,7 @@ private customerDao customerDAO;
         return customerDAO.getCustomer(id);
     }
     @RequestMapping(value = "api/customer", method = RequestMethod.GET)
-    public List<Customer> getSale(){
+    public List<Customer> getCustomer(){
         return customerDAO.getCustomer();
     } 
     
@@ -38,6 +38,11 @@ private customerDao customerDAO;
     @RequestMapping(value = "api/customer/{id}" , method = RequestMethod.PATCH)
     public void modCustomer(@RequestBody Customer customer, @PathVariable int id){
         customerDAO.modCustomer(customer, id);
+    }
+    
+    @RequestMapping(value = "api/customer/{id}", method = RequestMethod.DELETE)
+    public void deleteCustomer(@PathVariable int id){
+        customerDAO.delete(id);
     }
     
 }
