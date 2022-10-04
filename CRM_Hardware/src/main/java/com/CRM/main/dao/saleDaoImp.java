@@ -24,16 +24,6 @@ public class saleDaoImp implements saleDao{
     EntityManager entityManager;
     
     
-    /*@Override  me esta tirando error con esto, no se porque*/
-    
-    
-    /*
-    public List<Sale> getSale() {
-        String query = "select id_sale,date,product_code,units,value from sales";
-
-        return entityManager.createQuery(query).getResultList();
-    }*/
-    
     @Transactional
     public List<Sale> getSale() {
         String query = "FROM Sale";
@@ -62,14 +52,14 @@ public class saleDaoImp implements saleDao{
     
    
 
-    
+    /*Modificar*/
     @Override
-    public void modUser(Sale sale, int id) {
+    public void modSale(Sale sale, int id) {
         Sale temp = entityManager.find(Sale.class, id);
-        temp.setDate(temp.getDate());
-        temp.setProduct_code(temp.getProduct_code());
-        temp.setUnits(temp.getUnits());
-        temp.setValue(temp.getValue());
+        temp.setDate(sale.getDate());
+        temp.setProduct_code(sale.getProduct_code());
+        temp.setUnits(sale.getUnits());
+        temp.setValue(sale.getValue());
         entityManager.merge(temp);
     }
     

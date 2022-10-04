@@ -19,7 +19,7 @@ public interface saleDao{
 
     void regSale(Sale sale);
 
-   void modUser(Sale sale, int id);
+   void modSale(Sale sale, int id);
     
     List<Sale> getSale(int id);
     

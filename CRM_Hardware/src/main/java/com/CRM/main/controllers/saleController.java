@@ -40,15 +40,7 @@ public class saleController {
        return saleDAO.getSale();
     }
     
-    /*
-    @RequestMapping(value = "sale")
-    public List<Sale> listUsers(@RequestHeader(value = "Authorization") String token){
-
-        if (verifyToken(token)){
-            return null;
-        }
-        return userDAO.getUsers();
-    }*/
+   
     
     @RequestMapping(value = "api/sale", method = RequestMethod.POST)
     public void registerSale(@RequestBody Sale sale){ //Transforma json en un Usuario
@@ -61,13 +53,9 @@ public class saleController {
     }
     
     
-    
-    
-    @RequestMapping(value = "api/sale/{id}", method = RequestMethod.PUT)
-    public void modUser(@RequestBody Sale sale,@PathVariable int id){ //Transforma json en un Usuario
-       saleDAO.modUser(sale, id);
+    @RequestMapping(value = "api/sale/{id}", method = RequestMethod.PATCH)
+    public void modSale(@RequestBody Sale sale, @PathVariable int id){ //Transforma json en un Usuario
+         saleDAO.modSale(sale, id);
     }
-    
-    
     
 }
