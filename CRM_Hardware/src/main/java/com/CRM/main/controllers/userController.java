@@ -1,6 +1,5 @@
 package com.CRM.main.controllers;
 
-import com.CRM.main.dao.customerDao;
 import com.CRM.main.dao.userDao;
 import com.CRM.main.model.User;
 import java.util.List;
