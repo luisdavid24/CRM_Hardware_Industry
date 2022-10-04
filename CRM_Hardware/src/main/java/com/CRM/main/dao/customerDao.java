@@ -4,26 +4,14 @@
  */
 package com.CRM.main.dao;
 
-import com.CRM.main.model.Sale;
+import com.CRM.main.model.Customer;
 import java.util.List;
-
 /**
  *
- * @author david
+ * @author seang
  */
-
-public interface saleDao{
-    List<Sale> getSale();
-
-    void delete(int id);
-
-    void regSale(Sale sale);
-
-   void modUser(Sale sale, int id);
+public interface customerDao {
+    List<Customer> getCustomer();
     
-    List<Sale> getSale(int id);
-    
-    
-    
+    List<Customer> getCustomer(int id);
 }
- 
