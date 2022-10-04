@@ -49,5 +49,9 @@ public class customerDaoImp implements customerDao{
        entityManager.merge(temp);
    }
    
-   
+   @Override
+   public void delete(int id){
+       Customer customer = entityManager.find(Customer.class, id);
+       entityManager.remove(customer);
+   }
 }

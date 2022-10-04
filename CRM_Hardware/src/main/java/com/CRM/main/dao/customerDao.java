@@ -11,11 +11,14 @@ import java.util.List;
  * @author seang
  */
 public interface customerDao {
+    
     List<Customer> getCustomer();
     
     void regCustomer(Customer customer);
     
     void modCustomer(Customer customer, int id);
+    
+    void delete(int id);
     
     List<Customer> getCustomer(int id);
 }
