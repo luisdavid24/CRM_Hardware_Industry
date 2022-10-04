@@ -34,4 +34,10 @@ private customerDao customerDAO;
     public void registerCustomer(@RequestBody Customer customer){
         customerDAO.regCustomer(customer);
     }
+    
+    @RequestMapping(value = "api/customer/{id}" , method = RequestMethod.PATCH)
+    public void modCustomer(@RequestBody Customer customer, @PathVariable int id){
+        customerDAO.modCustomer(customer, id);
+    }
+    
 }

@@ -39,4 +39,13 @@ public class customerDaoImp implements customerDao{
    public void regCustomer(Customer customer){
        entityManager.merge(customer);
    }
+   
+   @Override
+   public void modCustomer(Customer customer, int id){
+       Customer temp= entityManager.find(Customer.class, id);
+       temp.setName(customer.getName());
+       temp.setEmail(customer.getEmail());
+       temp.setPhone(customer.getPhone());
+       entityManager.merge(temp);
+   }
 }

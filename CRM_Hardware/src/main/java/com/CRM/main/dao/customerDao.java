@@ -15,5 +15,7 @@ public interface customerDao {
     
     void regCustomer(Customer customer);
     
+    void modCustomer(Customer customer, int id);
+    
     List<Customer> getCustomer(int id);
 }
