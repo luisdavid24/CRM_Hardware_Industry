@@ -34,4 +34,9 @@ public class customerDaoImp implements customerDao{
        String query = "select id,name,email,phone from sales where id="+ id1;
        return entityManager.createQuery(query).getResultList();
    }
+   
+   @Override
+   public void regCustomer(Customer customer){
+       entityManager.merge(customer);
+   }
 }

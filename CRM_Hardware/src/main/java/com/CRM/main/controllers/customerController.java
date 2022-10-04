@@ -25,6 +25,13 @@ private customerDao customerDAO;
     public List<Customer> getCustomer(@PathVariable int id){
         return customerDAO.getCustomer(id);
     }
+    @RequestMapping(value = "api/customer", method = RequestMethod.GET)
+    public List<Customer> getSale(){
+        return customerDAO.getCustomer();
+    } 
     
-    
+    @RequestMapping (value = "api/customer", method = RequestMethod.POST)
+    public void registerCustomer(@RequestBody Customer customer){
+        customerDAO.regCustomer(customer);
+    }
 }

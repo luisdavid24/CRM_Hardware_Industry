@@ -13,5 +13,7 @@ import java.util.List;
 public interface customerDao {
     List<Customer> getCustomer();
     
+    void regCustomer(Customer customer);
+    
     List<Customer> getCustomer(int id);
 }
