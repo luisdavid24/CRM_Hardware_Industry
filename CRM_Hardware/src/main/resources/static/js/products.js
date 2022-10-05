@@ -75,5 +75,88 @@ async function deleteProduct(productCode){
             }, 2000);
         }
       })
+}
 
+
+
+async function loadData(productCode){
+    productToModify = productCode;
+    
+    const request = await fetch('api/product/' + productCode, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        }
+    });
+    
+    const productHTML = await request.json();
+    console.log(productHTML.name);
+    
+    document.modalForm.inputPrice.value = productHTML.price;
+    document.modalForm.inputUnits.value = productHTML.units;
+    document.modalForm.inputSupplier.value = productHTML.supplier;
+    document.getElementById('productNameSpan').outerHTML = productHTML.name;
+}
+
+async function  modifyProduct(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+      
+    let data = {};
+    
+    data.price = document.getElementById("inputPrice").value;
+    data.units = document.getElementById("inputUnits").value;
+    data.supplier = document.getElementById("inputSupplier").value;
+    
+    
+    Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Save',
+        denyButtonText: `Don't save`,
+      }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            const request = await fetch('/api/product/' + productToModify,{
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    price: data.price,
+                    units: data.units,
+                    supplier: data.supplier
+                })
+            });
+          
+            Toast.fire({
+                icon: 'success',
+                title: 'Saved successfully'
+            })
+            setTimeout(function(){
+                location.reload();
+            }, 3000);
+        } else if (result.isDenied) {
+            Toast.fire({
+                icon: 'warning',
+                title: 'Not Saved'
+            })
+            setTimeout(function(){
+                location.reload();
+            }, 3000);
+        }
+      })
 }
