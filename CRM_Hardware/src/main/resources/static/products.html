@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Products | JDAS</title>
+
+    <link href="/css/root.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/products.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <img src="/imgs/white-logo.svg" alt="white-logo" width="50px" height="auto">
+                    
+                </div>
+                <div class="sidebar-brand-text mx-3">JDAS</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Tables
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>Products</span>
+                </a>    
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Sales</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0"  id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                             
+                        <div class="span-container">
+                            <span id="user-name-txt"></span>    
+                        </div>
+                        
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <div class="btn-group">
+                            <button type="button" class="btn">
+                               <img src="/imgs/iconU.png" class="img-profile rounded-circle" alt="">
+                            </button>
+                            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                        <!-- Nav Item - End User Information-->     
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                
+                
+                <!-- Update Modal -->
+                
+                <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Product Info</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+                      <div class="modal-body">
+                        <form name = "modalForm">
+                            <p><b>Product:<b> <span id="productNameSpan"></span></p>
+                            <label for="inputPrice" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="inputPrice" placeholder="$" required"> 
+                            <hr>
+                            <label for="inputUnits" class="form-label">Units</label>
+                            <input type="text" class="form-control" id="inputUnits" placeholder="0" required">
+                            <hr>
+                            <label for="inputSupplier" class="form-label">Supplier</label>
+                            <input type="text" class="form-control" id="inputSupplier" placeholder="Company Name" required"> 
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-update" onclick="modifyProduct()">Update</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- End of Update Modal -->
+
+                <div class="main-div">
+                  
+                    <h1>Our Products</h1>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="resume-left">
+                                <h4>Number of products</h4>
+                                <p>258</p>
+                            </div>
+                            <div class="vertical-dotted-line"></div>
+                            <div class="resume-right">
+                                <h4>Popular Product</h4>
+                                <p>Intel Core I5 - 1400F</p>
+                                <spa>Price: <span>$500</span></spa>
+                            </div>
+                            <div class="btn-container">
+                                <button class="btn btn-success">Add a new Product</button>
+                            </div>
+                        </div>
+                        
+                        
+                      </div>
+
+                    <div class="product-resume">
+                        
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col" id="table-first">Code</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col" class="th-reduce">Units</th>
+                                    <th scope="col">Supplier</th>
+                                    <th scope="col" class="th-reduce">Delete</th>
+                                    <th scope="col" id="table-last" class="th-reduce">Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    
+            <!-- End of Main Content -->
+            </div>
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                    
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    
+    <!-- JQuery Cores -->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap template for all pages -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/js/home.js" ></script>
+    <script src="/js/products.js"></script>
+
+
+    <!-- Custom css -->
+    
+    <script>
+        document.getElementById('user-name-txt').outerHTML = localStorage.email;
+        document.getElementById('user-name').outerHTML = localStorage.email;
+    </script>
+
+</body>
+
+</html>
