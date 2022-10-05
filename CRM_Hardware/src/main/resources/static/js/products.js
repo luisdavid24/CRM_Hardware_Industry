@@ -1,0 +1,46 @@
+$(document).ready(function () {
+    loadProducts();
+});
+
+let productToModify;
+
+async function loadProducts() {
+
+    const request = await fetch('api/products', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        }
+        //body: JSON.stringify({a: 1, b: 'Textual content'})
+    });
+    const productsHTML = await request.json();
+    console.log(productsHTML);
+  
+    let listHTML = '';
+    
+    for(let it_product of productsHTML){
+        btnDelete = "<button onclick=deleteProduct(\'"+it_product.productCode+"\')>\n\
+                    <i class='bi bi-trash'></i>\n\
+                    </button>";
+        btnEdit = "<button onclick=loadData(\'"+it_product.productCode+"\') data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
+                   <i class='bi bi-pencil'></i>\n\
+                   </button>";
+        
+        
+        let productHTML = "<tr>\n\
+                        <td>"+ it_product.productCode +"</td>\n\
+                        <td>"+ it_product.name +"</td>\n\
+                        <td>"+ it_product.price +"</td>\n\
+                        <td>"+ it_product.units +"</td>\n\
+                        <td>"+ it_product.supplier +"</td>\n\
+                        <td>"+ btnDelete +"</td>\n\
+                        <td>"+ btnEdit +"</td>\n\
+                        </tr>";
+        listHTML += productHTML;     
+    }
+    
+    document.querySelector('#dataTable tbody').outerHTML = listHTML;
+    
+}
