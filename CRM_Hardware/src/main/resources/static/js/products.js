@@ -44,3 +44,36 @@ async function loadProducts() {
     document.querySelector('#dataTable tbody').outerHTML = listHTML;
     
 }
+
+async function deleteProduct(productCode){
+    
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#43546F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+            const request = await fetch('api/product/' + productCode, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token
+                }
+            });
+            Swal.fire(
+                'Deleted!',
+                'The product has been deleted.',
+                'success'
+            )
+            setTimeout(function(){
+                location.reload();
+            }, 2000);
+        }
+      })
+
+}
