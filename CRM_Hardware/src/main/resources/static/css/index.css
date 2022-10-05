@@ -1,12 +1,11 @@
 body {
-    background-color: var(--bs-cultured);
+    background-color: #F9F9F9;
     font-family: 'Roboto', sans-serif;
-
 }
 
 h1 {
-    color: var(--bs-independence);
-    font-family: var(--bs-font-family);
+    color: var(--purple);
+    font-family: var(--bs-font-family-roboto);
 }
 
 label {
@@ -14,18 +13,18 @@ label {
 }
 
 input {
-    background-color: var(--bs-cultured);
+    background-color: #F9F9F9;
 }
 
 #btn-login {
-    background-color: var(--bs-independence);
+    background-color: var(--purple);
     width: 200px;
 }
 
 #a-register {
     text-decoration: underline;
     display: block;
-    color: var(--bs-independence);
+    color: var(--purple);
 }
 
 .main-container {
