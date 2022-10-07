@@ -167,3 +167,41 @@ async function modifyCustomer() {
     })
 }
 
+async function insertCustomer() {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    let data = {};
+
+    data.name = document.getElementById("input_name").value;
+    data.email = document.getElementById("input_email").value;
+    data.phone = document.getElementById("input_phone").value;
+
+    const request = await fetch('api/customer', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
+    });
+
+    Toast.fire({
+        icon: 'success',
+        title: 'Product Inserted successfully'
+    })
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
+
+}
