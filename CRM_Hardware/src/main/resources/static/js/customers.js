@@ -105,3 +105,65 @@ async function deleteCustomer(id) {
     })
 }
 
+async function modifyCustomer() {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    let data = {};
+
+    data.name = document.getElementById("inputName").value;
+    data.email = document.getElementById("inputEmail").value;
+    data.phone = document.getElementById("inputPhone").value;
+    console.log(data);
+
+
+    Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Save',
+        denyButtonText: `Don't save`,
+    }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            const request = await fetch('/api/customer/' + customerToModify, {
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone
+                })
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Saved successfully'
+            })
+            setTimeout(function () {
+                location.reload();
+            }, 3000);
+        } else if (result.isDenied) {
+            Toast.fire({
+                icon: 'warning',
+                title: 'Not Saved'
+            })
+            setTimeout(function () {
+                location.reload();
+            }, 3000);
+        }
+    })
+}
+
