@@ -20,5 +20,5 @@ public interface customerDao {
     
     void delete(int id);
     
-    List<Customer> getCustomer(int id);
+    Customer getCustomerOne(int id);
 }
