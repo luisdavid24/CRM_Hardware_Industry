@@ -22,8 +22,8 @@ public class customerController {
 private customerDao customerDAO;
     
     @RequestMapping(value = "api/customer/{id}", method = RequestMethod.GET)
-    public List<Customer> getCustomer(@PathVariable int id){
-        return customerDAO.getCustomer(id);
+    public Customer getCustomer(@PathVariable int id){
+        return customerDAO.getCustomerOne(id);
     }
     @RequestMapping(value = "api/customer", method = RequestMethod.GET)
     public List<Customer> getCustomer(){
