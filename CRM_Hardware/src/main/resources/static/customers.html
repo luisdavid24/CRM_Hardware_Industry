@@ -143,9 +143,40 @@
                         <div>
                             <i class="bi bi-person icon-user"></i>
                         </div>
-                        <div class="customer-month">
-                            <div>New customers this month <br>20</div>
-                            <div><i class="bi bi-arrow-up icon-arrow"></i></div>
+                    </div>
+                </div>
+                <!-- End of Update Modal -->
+
+                <!-- Insert Modal -->
+                <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Insert Customer Info</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form name="modalForm">
+                                    <label for="input_name" class="form-label">Name *</label>
+                                    <input type="text" class="form-control" id="input_name" placeholder="Customer Name"
+                                        required">
+                                    <hr>
+                                    <label for="input_email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="input_email"
+                                        placeholder="example@mail.com" required">
+                                    <hr>
+                                    <label for="input_phone" class="form-label">Phone *</label>
+                                    <input type="number" class="form-control" id="input_phone" placeholder="321456789"
+                                        required">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-update" onclick="insertCustomer()">Insert
+                                    Customer</button>
+                            </div>
                         </div>
                     </div>
                     <div class="table-responsive">
