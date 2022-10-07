@@ -74,3 +74,34 @@ async function loadDataCustomer(id) {
     document.getElementById("inputName").value = productHTML.name;
 }
 
+async function deleteCustomer(id) {
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#43546F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            const request = await fetch('api/customer/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            Swal.fire(
+                'Deleted!',
+                'The customer has been deleted.',
+                'success'
+            )
+            setTimeout(function () {
+                location.reload();
+            }, 2000);
+        }
+    })
+}
+
