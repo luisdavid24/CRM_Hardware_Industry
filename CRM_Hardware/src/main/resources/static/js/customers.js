@@ -11,7 +11,7 @@ $(document).ready(function () {
     loadCustomers();
 });
 
-
+let customerToModify;
 
 async function loadCustomers() {
 
@@ -53,5 +53,24 @@ async function loadCustomers() {
 
     document.querySelector('#tableCustomers tbody').outerHTML = listHTML;
 
+}
+
+async function loadDataCustomer(id) {
+    customerToModify = id;
+
+    const request = await fetch('api/customer/' + id, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const productHTML = await request.json();
+
+    document.getElementById("inputEmail").value = productHTML.email;
+    document.getElementById("inputPhone").value = productHTML.phone;
+    document.getElementById('customerId').outerHTML = "Id:"+productHTML.id;
+    document.getElementById("inputName").value = productHTML.name;
 }
 
