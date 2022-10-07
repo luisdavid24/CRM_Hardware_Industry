@@ -29,10 +29,9 @@ public class customerDaoImp implements customerDao{
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override 
-   public List<Customer> getCustomer(int id1){
-       String query = "select id,name,email,phone from sales where id="+ id1;
-       return entityManager.createQuery(query).getResultList();
+     
+   public Customer getCustomerOne(int id){
+       return entityManager.find(Customer.class, id);
    }
    
    @Override
