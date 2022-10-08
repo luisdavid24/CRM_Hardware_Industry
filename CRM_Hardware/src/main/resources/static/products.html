@@ -150,10 +150,12 @@
                             <input type="number" class="form-control" id="inputPrice" placeholder="$" required"> 
                             <hr>
                             <label for="inputUnits" class="form-label">Units</label>
-                            <input type="text" class="form-control" id="inputUnits" placeholder="0" required">
+                            <input type="number" class="form-control" id="inputUnits" placeholder="0" required">
                             <hr>
                             <label for="inputSupplier" class="form-label">Supplier</label>
                             <input type="text" class="form-control" id="inputSupplier" placeholder="Company Name" required"> 
+                            <label for="inputURL" class="form-label">Image URL</label>
+                            <input type="url" class="form-control" id="inputURL" placeholder="http//example.co" required"> 
                         </form>
                       </div>
                       <div class="modal-footer">
@@ -176,7 +178,7 @@
                         <div class="modal-body">
                           <form name = "modalForm">
                             <label for="inputProductCode" class="form-label">Product Code *</label>
-                            <input type="tel" class="form-control" id="input_product_code" placeholder="$" required"> 
+                            <input type="tel" class="form-control" id="input_product_code" placeholder="4HGY" required"> 
                             <hr>
                             <label for="input_name" class="form-label">Name *</label>
                             <input type="text" class="form-control" id="input_name" placeholder="Product Name" required"> 
@@ -189,6 +191,9 @@
                             <hr>
                             <label for="input_supplier" class="form-label">Supplier *</label>
                             <input type="text" class="form-control" id="input_supplier" placeholder="Company Name" required"> 
+                            <hr>
+                            <label for="input_img" class="form-label">Img URL *</label>
+                            <input type="url" class="form-control" id="input_img" placeholder="http//example.co" required"> 
                           </form>
                         </div>
                         <div class="modal-footer">
@@ -220,43 +225,15 @@
                                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertModal">Add a new Product</button>
                             </div>
                         </div>
-                        
-                        
                       </div>
-
-                    <div class="product-resume">
                         
                     </div>
-                    <div class="table-responsive">
-                        <table class="table" id="dataTable">
-                            <thead>
-                                <tr>
-                                    <th scope="col" id="table-first">Code</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col" class="th-reduce">Units</th>
-                                    <th scope="col">Supplier</th>
-                                    <th scope="col" class="th-reduce">Delete</th>
-                                    <th scope="col" id="table-last" class="th-reduce">Update</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
+                
+                    <div class="gallery">
                     </div>
                 </div>
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                    
-                </div>
-            </footer>
-            <!-- End of Footer -->
+           
 
         </div>
         <!-- End of Content Wrapper -->
