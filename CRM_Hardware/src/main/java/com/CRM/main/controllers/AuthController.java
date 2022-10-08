@@ -31,6 +31,10 @@ public class AuthController {
         
         if(usLogged != null){
             return jwtUtil.create(String.valueOf(user.getId()), usLogged.getEmail());
+        }else{
+            return "FAIL";
         }
+        
+        
     }
 }

@@ -28,9 +28,9 @@ public class UserDAOImp implements UserDAO{
         
         if(argon2.verify(passHashed, user.getPassword())){
             return list.get(0);
+        }else{
+            return null;
         }
-        
-        return null;
     }
 
     @Override
