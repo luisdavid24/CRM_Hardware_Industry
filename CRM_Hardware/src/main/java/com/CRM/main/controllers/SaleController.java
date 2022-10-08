@@ -4,7 +4,6 @@
  */
 package com.CRM.main.controllers;
 
-import com.CRM.main.dao.saleDao;
 import com.CRM.main.model.Sale;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.CRM.main.dao.SaleDAO;
 
 /**
  *
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SaleController {
     @Autowired //Hace que la clase UDAOImpl cree un objeto y lo guarda
-    private saleDao saleDAO;
+    private SaleDAO saleDAO;
 
     /*Esto que o que
     @Autowired

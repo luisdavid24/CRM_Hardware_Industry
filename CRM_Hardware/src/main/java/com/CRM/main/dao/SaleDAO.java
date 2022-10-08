@@ -12,7 +12,7 @@ import java.util.List;
  * @author david
  */
 
-public interface saleDao{
+public interface SaleDAO{
     List<Sale> getSale();
 
     void delete(int id);
