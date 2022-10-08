@@ -2,7 +2,6 @@
 package com.CRM.main.controllers;
 
 import com.CRM.main.model.Customer;
-import com.CRM.main.dao.customerDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.CRM.main.dao.CustomerDAO;
 /**
  *
  * @author seang
  */
 
 @RestController
-public class customerController {
+public class CustomerController {
 @Autowired
-private customerDao customerDAO;
+private CustomerDAO customerDAO;
     
     @RequestMapping(value = "api/customer/{id}", method = RequestMethod.GET)
     public Customer getCustomer(@PathVariable int id){

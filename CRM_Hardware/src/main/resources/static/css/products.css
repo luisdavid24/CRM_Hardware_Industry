@@ -8,6 +8,9 @@ h1 {
     margin: 20px;
 }
 
+input{
+    color: #000;
+}
 .vertical-dotted-line {
     border-left: 1px dotted black;
     height: 100px;
@@ -149,6 +152,7 @@ th{
     flex-wrap: wrap;
     justify-content: center;
     margin: 50px;
+    background-color: #000;
 }
 
 .item{
@@ -161,7 +165,7 @@ th{
     border-radius: 20px;
     /* cursor: pointer; */
     transition: all 400ms ease;
-    margin: 20px;
+    margin: 25px;
 }
 
 .item:hover{
@@ -174,13 +178,21 @@ th{
 
 .item button{
     margin-bottom: 10px;
-    background-color: #43546f;
-    border: none;
-    border-radius: 20px;
-    color: white;
+}
+
+.btn-primary{
+    background-color: #43546F;
+}
+
+.btn-primary:hover{
+    background-color: #5C7296;
 }
 
 .item img{
-    width: 250px
+    max-width:250px;
+    min-height: 250px;
+    min-height: 250px;
+    max-height: 250px;
+    margin: 15px;      
 }
 
