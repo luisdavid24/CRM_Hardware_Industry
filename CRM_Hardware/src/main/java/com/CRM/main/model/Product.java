@@ -33,6 +33,8 @@ public class Product {
             
     @Getter @Setter @Column(name = "supplier")
     private String supplier;
-    
+ 
+    @Getter @Setter @Column(name = "imgURL")
+    private String imgURL;
 }
 

@@ -29,14 +29,17 @@ public class CustomerDAOImp implements CustomerDAO{
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override 
-   public List<Customer> getCustomer(int id1){
-       String query = "select id,name,email,phone from sales where id="+ id1;
-       return entityManager.createQuery(query).getResultList();
+     
+   public Customer getCustomerOne(int id){
+       return entityManager.find(Customer.class, id);
    }
    
    @Override
    public void regCustomer(Customer customer){
+       Customer customerNew = new Customer();
+       customerNew.setEmail(customer.getEmail());
+       customerNew.setName(customer.getName());
+       customerNew.setPhone(customer.getPhone());
        entityManager.merge(customer);
    }
    

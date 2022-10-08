@@ -19,7 +19,7 @@ import lombok.ToString;
 public class Customer {
     
     @Id
-    @Column(name = "id")
+    @Column(name = "id") @GeneratedValue(strategy = GenerationType.AUTO )
     @Getter @Setter
     private int id;
     

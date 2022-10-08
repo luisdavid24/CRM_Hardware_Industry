@@ -5,6 +5,16 @@ $(document).ready(function () {
 let productToModify;
 
 
+
+window.addEventListener("load", () =>{
+    const loader = document.querySelector(".loader");
+    loader.classList.add("loader--hidden");
+
+    loader.addEventListener("transitioned", () =>{
+        document.body.removeChild(loader);
+    })
+})
+
 async function loadProducts() {
 
     const request = await fetch('api/products', {
@@ -21,27 +31,28 @@ async function loadProducts() {
     let listHTML = '';
 
     for (let it_product of productsHTML) {
-        btnDelete = "<button onclick=deleteProduct(\'" + it_product.productCode + "\')>\n\
-                    <i class='bi bi-trash'></i>\n\
+        btnDelete = "<button class='btn btn-danger' onclick=deleteProduct(\'" + it_product.productCode + "\')>\n\
+                    Delete\n\
                     </button>";
-        btnEdit = "<button onclick=loadData(\'" + it_product.productCode + "\') data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
-                   <i class='bi bi-pencil'></i>\n\
+        btnEdit = "<button class='btn btn-primary' onclick=loadData(\'" + it_product.productCode + "\') data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
+                   Update\n\
                    </button>";
 
 
-        let productHTML = "<tr>\n\
-                        <td>"+ it_product.productCode + "</td>\n\
-                        <td>"+ it_product.name + "</td>\n\
-                        <td>"+ it_product.price + "</td>\n\
-                        <td>"+ it_product.units + "</td>\n\
-                        <td>"+ it_product.supplier + "</td>\n\
-                        <td>"+ btnDelete + "</td>\n\
-                        <td>"+ btnEdit + "</td>\n\
-                        </tr>";
+        let productHTML = "<div class='item'>\n\
+                            <img src="+it_product.imgURL+"> \n\
+                            <h5>"+it_product.name+"</h2>\n\
+                            <h6>"+it_product.productCode+"</h4>\n\
+                            <p><b>Units:</b>"+ it_product.units +"</p>\n\
+                            <p><b>Supplier:</b>" +it_product.supplier+ "</p>\n\
+                            <p><b>Price per unit: $</b>"+ it_product.price +"</p>\n\
+                            "+btnDelete+"\n\
+                            "+btnEdit+"\n\
+                        </div>"
         listHTML += productHTML;
     }
 
-    document.querySelector('#dataTable tbody').outerHTML = listHTML;
+    document.querySelector('.gallery').outerHTML = listHTML;
 
 }
 
@@ -92,15 +103,13 @@ async function loadData(productCode) {
     });
 
     const productHTML = await request.json();
-    console.log(productHTML.name);
+ 
 
-    // document.modalForm.inputPrice.value = productHTML.price;
-    // document.modalForm.inputUnits.value = productHTML.units;
-    // document.modalForm.inputSupplier.value = productHTML.supplier;
     document.getElementById("inputPrice").value = productHTML.price;
     document.getElementById("inputUnits").value = productHTML.units;
     document.getElementById("inputSupplier").value = productHTML.supplier;
     document.getElementById('productNameSpan').outerHTML = productHTML.name;
+    document.getElementById('inputURL').value = productHTML.imgURL;
 }
 
 async function modifyProduct() {
@@ -121,6 +130,7 @@ async function modifyProduct() {
     data.price = document.getElementById("inputPrice").value;
     data.units = document.getElementById("inputUnits").value;
     data.supplier = document.getElementById("inputSupplier").value;
+    data.imgURL = document.getElementById("inputURL").value;
 
 
     Swal.fire({
@@ -141,7 +151,8 @@ async function modifyProduct() {
                 body: JSON.stringify({
                     price: data.price,
                     units: data.units,
-                    supplier: data.supplier
+                    supplier: data.supplier,
+                    imgURL: data.imgURL
                 })
             });
 
@@ -185,6 +196,7 @@ async function insertProduct() {
     data.price = document.getElementById("input_price").value;
     data.units = document.getElementById("input_units").value;
     data.supplier = document.getElementById("input_supplier").value;
+    data.imgURL = document.getElementById("input_img").value;
 
     const request = await fetch('api/products', {
         method: 'POST',

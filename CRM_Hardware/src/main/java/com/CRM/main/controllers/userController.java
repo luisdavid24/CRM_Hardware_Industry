@@ -1,21 +1,26 @@
 package com.CRM.main.controllers;
 
-import com.CRM.main.dao.userDao;
 import com.CRM.main.model.User;
-import java.util.List;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import com.CRM.main.dao.userDao;
+/**
+ *
+ * @author Anderson
+ */
 @RestController
 public class userController {
-@Autowired
+
+    @Autowired
     private userDao userDAO;
     
-    @RequestMapping(value = "api/user/{id}", method = RequestMethod.GET)
-    public List<User> getUser(@PathVariable int id){
-        return userDAO.getUser();
+    @RequestMapping(value = "/api/users", method = RequestMethod.POST)
+    public void registerUser(@RequestBody User user){
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
+        String hash = argon2.hash(1, 1024, 1, user.getPassword());
+        user.setPassword(hash);
+        userDAO.registerUser(user);
     }
 }

@@ -34,6 +34,7 @@ public class ProductDAOImp implements ProductDAO{
         pTemp.setPrice(product.getPrice());
         pTemp.setUnits(product.getUnits());
         pTemp.setSupplier(product.getSupplier());
+        pTemp.setImgURL(product.getImgURL());
         entityManager.merge(pTemp);
     }
 
