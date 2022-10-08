@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Transactional
-public class saleDaoImp implements saleDao{
+public class SaleDAOImp implements SaleDAO{
     
     @PersistenceContext
     EntityManager entityManager;

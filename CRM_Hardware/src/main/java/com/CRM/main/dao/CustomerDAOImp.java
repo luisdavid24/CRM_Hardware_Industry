@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Transactional
-public class customerDaoImp implements customerDao{
+public class CustomerDAOImp implements CustomerDAO{
 
     @PersistenceContext
     EntityManager entityManager;
