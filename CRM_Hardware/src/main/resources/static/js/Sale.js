@@ -8,103 +8,98 @@ window.addEventListener("load", () =>{
 })
 
 $(document).ready(function () {
-    loadCustomers();
+    loadSales();
 });
 
 let customerToModify;
 
-async function loadCustomers() {
+async function loadSales() {
 
-    const request = await fetch('api/customer', {
+    const request = await fetch('api/sale', {
         method: 'GET',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
     });
-    const customersHTML = await request.json();
-    console.log(customersHTML);
+    const sales = await request.json();
+    let listadoHtml = '';
 
-    let listHTML = '';
-
-    document.querySelector('#sanNumberUser1').outerHTML = customersHTML.length;
-    document.querySelector('#sanNumberUser2').outerHTML = customersHTML.length;
-    alert(customersHTML.length);
-
-    for (let it_customer of customersHTML) {
-        btnDelete = "<button class='btn-icons' onclick=deleteCustomer(\'" + it_customer.id + "\')>\n\
-                    <i class='bi bi-trash'></i>\n\
-                    </button>";
-        btnEdit = "<button class='btn-icons' onclick=loadDataCustomer(\'" + it_customer.id + "\') data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
-                    <i class='bi bi-pencil'></i>\n\
-                    </button>";
-
-
-        let productHTML = "<tr>\n\
-                        <td>"+ it_customer.id + "</td>\n\
-                        <td>"+ it_customer.name + "</td>\n\
-                        <td>"+ it_customer.email + "</td>\n\
-                        <td>"+ it_customer.phone + "</td>\n\
-                        <td>"+ btnDelete + "</td>\n\
-                        <td>"+ btnEdit + "</td>\n\
-                        </tr>";
-        listHTML += productHTML;
+    for (let sale of sales) {
+        let botonEliminar = "<button class='btn-icons' onclick=deleteSale(" +sale.id+ ")>\n\<i class='bi bi-trash'></i>\n\</button>";
+        botonEditar= "<button class='btn-icons' onclick=updateSale(" +sale.id + ") data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
+        <i class='bi bi-pencil'></i>\n\
+        </button>";
+        let saleHtml='<tr><td> '+sale.id+' </td><td> '+sale.date+' </td><td> '+sale.product_code+' </td><td> '+sale.units+' </td><td> '+sale.value+' </td><td>'+botonEliminar+'</td><td>'+botonEditar+'</td></th></tr>';
+    
+      listadoHtml += saleHtml;
     }
-
-    document.querySelector('#tableCustomers tbody').outerHTML = listHTML;
+    document.querySelector('#tableSale tbody ').outerHTML = listadoHtml;
 
 }
-
-async function loadDataCustomer(id) {
-    customerToModify = id;
-
-    const request = await fetch('api/customer/' + id, {
+let idUpdate=null;
+async function updateSale(id) {
+    const request = await fetch('api/sale', {
         method: 'GET',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
+      });
+    let saleUpdate = {};
+    idUpdate=id;
+
+    const sales = await request.json();
+    for (let sale of sales) {
+        if(sale.id==id){
+            saleUpdate=sale;
+        }
+    }
+    document.getElementById('txtProduct_code').value=saleUpdate.product_code;
+    document.getElementById('units').value=saleUpdate.units;
+    document.getElementById('value').value=saleUpdate.value;
+}
+
+async function deleteSale(id) {
+
+    const request = await fetch('api/sale/'+id, {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+    location.reload();
+}
+function getHeaders(){
+    return {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        
+    };
+    }
+    
+    async function modSale() {
+    let datos = {};
+    datos.id=idUpdate;
+    datos.date = document.getElementById('txtDate').value;
+    datos.product_code = document.getElementById('txtProduct_code').value;
+    datos.units = document.getElementById('units').value;
+    datos.value = document.getElementById('value').value;
+    
+    const request = await fetch('api/sale/' + idUpdate, {
+        method: 'PATCH',
+        headers: getHeaders(),
+        body: JSON.stringify({
+            date: datos.date,
+            product_code: datos.product_code,
+            units: datos.units,
+            value: datos.value
+        }) 
     });
-
-    const productHTML = await request.json();
-
-    document.getElementById("inputEmail").value = productHTML.email;
-    document.getElementById("inputPhone").value = productHTML.phone;
-    document.getElementById('customerId').outerHTML = "Id:"+productHTML.id;
-    document.getElementById("inputName").value = productHTML.name;
+    loadSales();
 }
-
-async function deleteCustomer(id) {
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#43546F',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then(async (result) => {
-        if (result.isConfirmed) {
-            const request = await fetch('api/customer/' + id, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-            Swal.fire(
-                'Deleted!',
-                'The customer has been deleted.',
-                'success'
-            )
-            setTimeout(function () {
-                location.reload();
-            }, 2000);
-        }
-    })
-}
-
+    
 async function modifyCustomer() {
     const Toast = Swal.mixin({
         toast: true,
