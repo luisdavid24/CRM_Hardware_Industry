@@ -11,11 +11,14 @@ import com.CRM.main.model.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.CRM.main.dao.userDao;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author Anderson
  */
+@RestController
 public class AuthController {
     
     
@@ -25,14 +28,15 @@ public class AuthController {
     @Autowired
     private JWTUtil jwtUtil;
     
-    @RequestMapping(value = "/api/login")
+    @RequestMapping(value = "/api/login", method = RequestMethod.GET)
     public String login(@RequestBody User user){
-        User usLogged = userDAO.getUserByCr(user);
+        /*User usLogged = userDAO.getUserByCr(user);
         
         if(usLogged != null){
             return jwtUtil.create(String.valueOf(user.getId()), usLogged.getEmail());
         }else{
             return "FAIL";
-        }
+        }*/
+        return "Me gusta el mondongo";
     }
 }

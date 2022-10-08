@@ -36,8 +36,4 @@ public class userDaoImp implements userDao{
     @Override
     public void registerUser(User user) {entityManager.merge(user);}
     
-    
-    
-    
-    
 }
