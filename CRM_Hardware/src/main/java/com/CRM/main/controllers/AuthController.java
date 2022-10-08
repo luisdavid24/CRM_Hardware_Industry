@@ -7,10 +7,10 @@ package com.CRM.main.controllers;
 
 import com.CRM.main.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.CRM.main.dao.UserDAO;
 import com.CRM.main.model.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.CRM.main.dao.userDao;
 
 /**
  *
@@ -20,7 +20,7 @@ public class AuthController {
     
     
     @Autowired
-    private UserDAO userDAO;
+    private userDao userDAO;
     
     @Autowired
     private JWTUtil jwtUtil;
@@ -34,7 +34,5 @@ public class AuthController {
         }else{
             return "FAIL";
         }
-        
-        
     }
 }
