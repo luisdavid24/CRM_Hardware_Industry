@@ -1,8 +1,9 @@
 package com.CRM.main.dao;
 
-import com.CRM.main.model.Customer;
 import com.CRM.main.model.User;
-import java.util.List;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -15,16 +16,28 @@ public class UserDAOImp implements UserDAO{
     @PersistenceContext
     EntityManager entityManager;
     
-    @Transactional 
-    public List<User> getUser() {
-        String query = "FROM user";
-        return entityManager.createQuery(query).getResultList();
+    @Override
+    public User getUserByCr(User user) {
+        String query = "SELECT u FROM User u WHERE u.email = :email";
+        
+        ArrayList<User> list = (ArrayList<User>) entityManager.createQuery(query).setParameter("email", user.getEmail()).
+                getResultList();
+        
+        String passHashed = list.get(0).getPassword();
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
+        
+        if(argon2.verify(passHashed, user.getPassword())){
+            return list.get(0);
+        }
+        
+        return null;
     }
 
     @Override
-    public List<User> getUser(int id) {
-        String query = "select id,name,email,phone,password from users where id="+ id;
-       return entityManager.createQuery(query).getResultList();
-    }
+    public void registerUser(User user) {entityManager.merge(user);}
+    
+    
+    
+    
     
 }
