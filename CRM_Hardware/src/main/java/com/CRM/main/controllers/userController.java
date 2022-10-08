@@ -1,12 +1,11 @@
 package com.CRM.main.controllers;
 
 import com.CRM.main.model.User;
-import com.CRM.main.dao.UserDAO;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.CRM.main.dao.UserDAO;
 /**
  *
  * @author Anderson
@@ -24,7 +23,4 @@ public class UserController {
         user.setPassword(hash);
         userDAO.registerUser(user);
     }
-    
-    
-    
 }
