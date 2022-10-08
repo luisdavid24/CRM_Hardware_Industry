@@ -6,6 +6,7 @@ import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.CRM.main.dao.UserDAO;
+import java.util.List;
 /**
  *
  * @author Anderson
@@ -15,6 +16,12 @@ public class UserController {
 
     @Autowired
     private UserDAO userDAO;
+    
+    @RequestMapping(value = "/api/users", method = RequestMethod.GET)
+    public List<User> getUsers(){
+        return userDAO.getUsers();
+    }
+    
     
     @RequestMapping(value = "/api/users", method = RequestMethod.POST)
     public void registerUser(@RequestBody User user){

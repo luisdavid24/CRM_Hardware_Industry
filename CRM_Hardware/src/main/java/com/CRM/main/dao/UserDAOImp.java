@@ -4,6 +4,7 @@ import com.CRM.main.model.User;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -35,5 +36,11 @@ public class UserDAOImp implements UserDAO{
 
     @Override
     public void registerUser(User user) {entityManager.merge(user);}
+
+    @Override
+    public List<User> getUsers() {
+        String query = "SELECT u FROM User u";
+        return (List<User>)entityManager.createQuery(query).getResultList();
+    }
     
 }
