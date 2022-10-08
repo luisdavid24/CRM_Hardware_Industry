@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author seang
  */
-public interface customerDao {
+public interface CustomerDAO {
     
     List<Customer> getCustomer();
     
