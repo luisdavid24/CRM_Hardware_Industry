@@ -11,53 +11,54 @@ $(document).ready(function () {
     loadSales();
 });
 
-let customerToModify;
 
 async function loadSales() {
-
+    
     const request = await fetch('api/sale', {
         method: 'GET',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         }
     });
     const sales = await request.json();
     let listadoHtml = '';
-
+    
     for (let sale of sales) {
         let botonEliminar = "<button class='btn-icons' onclick=deleteSale(" +sale.id+ ")>\n\<i class='bi bi-trash'></i>\n\</button>";
         botonEditar= "<button class='btn-icons' onclick=updateSale(" +sale.id + ") data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
         <i class='bi bi-pencil'></i>\n\
         </button>";
         let saleHtml='<tr><td> '+sale.id+' </td><td> '+sale.date+' </td><td> '+sale.product_code+' </td><td> '+sale.units+' </td><td> '+sale.value+' </td><td>'+botonEliminar+'</td><td>'+botonEditar+'</td></th></tr>';
-    
-      listadoHtml += saleHtml;
+        
+        listadoHtml += saleHtml;
     }
     document.querySelector('#tableSale tbody ').outerHTML = listadoHtml;
-
+    
 }
 let idUpdate=null;
+let dateUpdate=null;
 async function updateSale(id) {
     const request = await fetch('api/sale', {
         method: 'GET',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         }
-      });
+    });
     let saleUpdate = {};
     idUpdate=id;
-
+    
     const sales = await request.json();
     for (let sale of sales) {
         if(sale.id==id){
             saleUpdate=sale;
+            dateUpdate=sale.date;
         }
     }
-    document.getElementById('txtProduct_code').value=saleUpdate.product_code;
-    document.getElementById('units').value=saleUpdate.units;
-    document.getElementById('value').value=saleUpdate.value;
+    document.getElementById('input_product_code_update').value=saleUpdate.product_code;
+    document.getElementById('input_units_update').value=saleUpdate.units;
+    document.getElementById('input_value_update').value=saleUpdate.value;
 }
 
 async function deleteSale(id) {
@@ -79,14 +80,17 @@ function getHeaders(){
     };
     }
     
-    async function modSale() {
+async function modSale() {
     let datos = {};
     datos.id=idUpdate;
-    datos.date = document.getElementById('txtDate').value;
-    datos.product_code = document.getElementById('txtProduct_code').value;
-    datos.units = document.getElementById('units').value;
-    datos.value = document.getElementById('value').value;
+    // datos.date = document.getElementById('txtDate');
+    datos.product_code = document.getElementById('input_product_code_update').value;
+    datos.units = document.getElementById('input_value_update').value;
+    datos.value = document.getElementById('input_units_update').value;
+    datos.date=dateUpdate;
     
+    console.log(datos);
+
     const request = await fetch('api/sale/' + idUpdate, {
         method: 'PATCH',
         headers: getHeaders(),
@@ -99,104 +103,25 @@ function getHeaders(){
     });
     loadSales();
 }
+async function addSale() {
+    let datos = {};
+    datos.date = document.getElementById('input_date').value;
+    datos.product_code = document.getElementById('input_product_code').value;
+    datos.units = document.getElementById('input_units').value;
+    datos.value = document.getElementById('input_value').value;
     
-async function modifyCustomer() {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
-
-    let data = {};
-
-    data.name = document.getElementById("inputName").value;
-    data.email = document.getElementById("inputEmail").value;
-    data.phone = document.getElementById("inputPhone").value;
-    console.log(data);
-
-
-    Swal.fire({
-        title: 'Do you want to save the changes?',
-        showDenyButton: true,
-        showCancelButton: false,
-        confirmButtonText: 'Save',
-        denyButtonText: `Don't save`,
-    }).then(async (result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            const request = await fetch('/api/customer/' + customerToModify, {
-                method: 'PATCH',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: data.name,
-                    email: data.email,
-                    phone: data.phone
-                })
-            });
-
-            Toast.fire({
-                icon: 'success',
-                title: 'Saved successfully'
-            })
-            setTimeout(function () {
-                location.reload();
-            }, 3000);
-        } else if (result.isDenied) {
-            Toast.fire({
-                icon: 'warning',
-                title: 'Not Saved'
-            })
-            setTimeout(function () {
-                location.reload();
-            }, 3000);
-        }
-    })
-}
-
-async function insertCustomer() {
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
-
-    let data = {};
-
-    data.name = document.getElementById("input_name").value;
-    data.email = document.getElementById("input_email").value;
-    data.phone = document.getElementById("input_phone").value;
-
-    const request = await fetch('api/customer', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
+    // console.log(datos);
+  
+    const request = await fetch('api/sale', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datos)
     });
-
-    Toast.fire({
-        icon: 'success',
-        title: 'Product Inserted successfully'
-    })
-    setTimeout(function () {
-        location.reload();
-    }, 3000);
-
+    loadSales();
+   
 }
+    
+
