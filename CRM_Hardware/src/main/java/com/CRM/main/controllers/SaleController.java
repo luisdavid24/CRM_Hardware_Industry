@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class saleController {
+public class SaleController {
     @Autowired //Hace que la clase UDAOImpl cree un objeto y lo guarda
     private saleDao saleDAO;
 

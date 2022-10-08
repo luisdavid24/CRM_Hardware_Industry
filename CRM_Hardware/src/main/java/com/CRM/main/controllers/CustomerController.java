@@ -17,7 +17,7 @@ import com.CRM.main.dao.CustomerDAO;
  */
 
 @RestController
-public class customerController {
+public class CustomerController {
 @Autowired
 private CustomerDAO customerDAO;
     
