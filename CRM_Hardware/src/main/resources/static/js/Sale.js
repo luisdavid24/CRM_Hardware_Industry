@@ -8,200 +8,120 @@ window.addEventListener("load", () =>{
 })
 
 $(document).ready(function () {
-    loadCustomers();
+    loadSales();
 });
 
-let customerToModify;
 
-async function loadCustomers() {
-
-    const request = await fetch('api/customer', {
+async function loadSales() {
+    
+    const request = await fetch('api/sale', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
     });
-    const customersHTML = await request.json();
-    console.log(customersHTML);
-
-    let listHTML = '';
-
-    document.querySelector('#sanNumberUser1').outerHTML = customersHTML.length;
-    document.querySelector('#sanNumberUser2').outerHTML = customersHTML.length;
-    alert(customersHTML.length);
-
-    for (let it_customer of customersHTML) {
-        btnDelete = "<button class='btn-icons' onclick=deleteCustomer(\'" + it_customer.id + "\')>\n\
-                    <i class='bi bi-trash'></i>\n\
-                    </button>";
-        btnEdit = "<button class='btn-icons' onclick=loadDataCustomer(\'" + it_customer.id + "\') data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
-                    <i class='bi bi-pencil'></i>\n\
-                    </button>";
-
-
-        let productHTML = "<tr>\n\
-                        <td>"+ it_customer.id + "</td>\n\
-                        <td>"+ it_customer.name + "</td>\n\
-                        <td>"+ it_customer.email + "</td>\n\
-                        <td>"+ it_customer.phone + "</td>\n\
-                        <td>"+ btnDelete + "</td>\n\
-                        <td>"+ btnEdit + "</td>\n\
-                        </tr>";
-        listHTML += productHTML;
+    const sales = await request.json();
+    let listadoHtml = '';
+    
+    for (let sale of sales) {
+        let botonEliminar = "<button class='btn-icons' onclick=deleteSale(" +sale.id+ ")>\n\<i class='bi bi-trash'></i>\n\</button>";
+        botonEditar= "<button class='btn-icons' onclick=updateSale(" +sale.id + ") data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
+        <i class='bi bi-pencil'></i>\n\
+        </button>";
+        let saleHtml='<tr><td> '+sale.id+' </td><td> '+sale.date+' </td><td> '+sale.product_code+' </td><td> '+sale.units+' </td><td> '+sale.value+' </td><td>'+botonEliminar+'</td><td>'+botonEditar+'</td></th></tr>';
+        
+        listadoHtml += saleHtml;
     }
-
-    document.querySelector('#tableCustomers tbody').outerHTML = listHTML;
-
+    document.querySelector('#tableSale tbody ').outerHTML = listadoHtml;
+    
 }
-
-async function loadDataCustomer(id) {
-    customerToModify = id;
-
-    const request = await fetch('api/customer/' + id, {
+let idUpdate=null;
+let dateUpdate=null;
+async function updateSale(id) {
+    const request = await fetch('api/sale', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
     });
-
-    const productHTML = await request.json();
-
-    document.getElementById("inputEmail").value = productHTML.email;
-    document.getElementById("inputPhone").value = productHTML.phone;
-    document.getElementById('customerId').outerHTML = "Id:"+productHTML.id;
-    document.getElementById("inputName").value = productHTML.name;
+    let saleUpdate = {};
+    idUpdate=id;
+    
+    const sales = await request.json();
+    for (let sale of sales) {
+        if(sale.id==id){
+            saleUpdate=sale;
+            dateUpdate=sale.date;
+        }
+    }
+    document.getElementById('input_product_code_update').value=saleUpdate.product_code;
+    document.getElementById('input_units_update').value=saleUpdate.units;
+    document.getElementById('input_value_update').value=saleUpdate.value;
 }
 
-async function deleteCustomer(id) {
+async function deleteSale(id) {
 
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#43546F',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then(async (result) => {
-        if (result.isConfirmed) {
-            const request = await fetch('api/customer/' + id, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-            Swal.fire(
-                'Deleted!',
-                'The customer has been deleted.',
-                'success'
-            )
-            setTimeout(function () {
-                location.reload();
-            }, 2000);
-        }
-    })
-}
-
-async function modifyCustomer() {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
-
-    let data = {};
-
-    data.name = document.getElementById("inputName").value;
-    data.email = document.getElementById("inputEmail").value;
-    data.phone = document.getElementById("inputPhone").value;
-    console.log(data);
-
-
-    Swal.fire({
-        title: 'Do you want to save the changes?',
-        showDenyButton: true,
-        showCancelButton: false,
-        confirmButtonText: 'Save',
-        denyButtonText: `Don't save`,
-    }).then(async (result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            const request = await fetch('/api/customer/' + customerToModify, {
-                method: 'PATCH',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: data.name,
-                    email: data.email,
-                    phone: data.phone
-                })
-            });
-
-            Toast.fire({
-                icon: 'success',
-                title: 'Saved successfully'
-            })
-            setTimeout(function () {
-                location.reload();
-            }, 3000);
-        } else if (result.isDenied) {
-            Toast.fire({
-                icon: 'warning',
-                title: 'Not Saved'
-            })
-            setTimeout(function () {
-                location.reload();
-            }, 3000);
-        }
-    })
-}
-
-async function insertCustomer() {
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
-
-    let data = {};
-
-    data.name = document.getElementById("input_name").value;
-    data.email = document.getElementById("input_email").value;
-    data.phone = document.getElementById("input_phone").value;
-
-    const request = await fetch('api/customer', {
-        method: 'POST',
+    const request = await fetch('api/sale/'+id, {
+        method: 'DELETE',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
-    });
-
-    Toast.fire({
-        icon: 'success',
-        title: 'Product Inserted successfully'
-    })
-    setTimeout(function () {
-        location.reload();
-    }, 3000);
-
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+    location.reload();
 }
+function getHeaders(){
+    return {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        
+    };
+    }
+    
+async function modSale() {
+    let datos = {};
+    datos.id=idUpdate;
+    // datos.date = document.getElementById('txtDate');
+    datos.product_code = document.getElementById('input_product_code_update').value;
+    datos.units = document.getElementById('input_value_update').value;
+    datos.value = document.getElementById('input_units_update').value;
+    datos.date=dateUpdate;
+    
+    console.log(datos);
+
+    const request = await fetch('api/sale/' + idUpdate, {
+        method: 'PATCH',
+        headers: getHeaders(),
+        body: JSON.stringify({
+            date: datos.date,
+            product_code: datos.product_code,
+            units: datos.units,
+            value: datos.value
+        }) 
+    });
+    loadSales();
+}
+async function addSale() {
+    let datos = {};
+    datos.date = document.getElementById('input_date').value;
+    datos.product_code = document.getElementById('input_product_code').value;
+    datos.units = document.getElementById('input_units').value;
+    datos.value = document.getElementById('input_value').value;
+    
+    // console.log(datos);
+  
+    const request = await fetch('api/sale', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datos)
+    });
+    loadSales();
+   
+}
+    
+

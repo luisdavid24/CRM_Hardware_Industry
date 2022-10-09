@@ -148,22 +148,22 @@
                             <div class="modal-body">
                                 <form name="modalForm">
                                     <p><b>Customer <b> <span id="customerId"></span></p>
-                                    <label for="customerName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="" required">
+                                    <label for="customerName" class="form-label">Product code</label>
+                                    <input type="text" class="form-control" id="input_product_code_update" placeholder="AAADD" required">
                                     <hr>
                                     <span id="customerEmailSpan"></span></p>
-                                    <label for="customerEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="" required">
+                                    <label for="customerEmail" class="form-label">Units</label>
+                                    <input type="number" class="form-control" id="input_units_update" placeholder="20" required">
                                     <hr>
                                     <span id="customerPhoneSpan"></span></p>
-                                    <label for="customerPhone" class="form-label">Phone Number</label>
-                                    <input type="number" class="form-control" id="inputPhone" placeholder="" required">
+                                    <label for="customerPhone" class="form-label">Value</label>
+                                    <input type="number" class="form-control" id="input_value_update" placeholder="3800" required">
                                     <hr>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-update" onclick="modifyCustomer()">Update</button>
+                                <button type="button" class="btn btn-update" onclick="modSale()">Update</button>
                             </div>
                         </div>
                     </div>
@@ -176,28 +176,30 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Insert Customer Info</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Insert Sale Info</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
                                         class="fa-solid fa-xmark"></i></button>
                             </div>
                             <div class="modal-body">
                                 <form name="modalForm">
-                                    <label for="input_name" class="form-label">Name *</label>
-                                    <input type="text" class="form-control" id="input_name" placeholder="Customer Name"
+                                    <label for="input_name" class="form-label">Date *</label>
+                                    <input type="date" class="form-control" id="input_date" placeholder="2022-10-13"
                                         required">
                                     <hr>
-                                    <label for="input_email" class="form-label">Email *</label>
-                                    <input type="email" class="form-control" id="input_email"
-                                        placeholder="example@mail.com" required">
+                                    <label for="input_email" class="form-label">Product code *</label>
+                                    <input type="text" class="form-control" id="input_product_code"
+                                        placeholder="AADD43" required">
                                     <hr>
-                                    <label for="input_phone" class="form-label">Phone *</label>
-                                    <input type="number" class="form-control" id="input_phone" placeholder="321456789"
-                                        required">
+                                    <label for="input_phone" class="form-label">Units *</label>
+                                    <input type="number" class="form-control" id="input_units" placeholder="30"required">
+                                    <hr>
+                                    <label for="input_phone" class="form-label">Value *</label>
+                                    <input type="number" class="form-control" id="input_value" placeholder="2500"required">
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-update" onclick="insertCustomer()">Insert
+                                <button type="button" class="btn btn-update" onclick="addSale()">Insert
                                     Customer</button>
                             </div>
                         </div>
@@ -230,13 +232,14 @@
                         </div>
                     </div>
                 <div class="table-responsive">
-                    <table class="table" id="tableCustomers">
+                    <table class="table" id="tableSale">
                         <thead>
                             <tr>
                                 <th scope="col" id="table-first" class="th-reduce">Id</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone Number</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Product code</th>
+                                <th scope="col">Units</th>
+                                <th scope="col">Value</th>
                                 <th scope="col" class="th-reduce" >Delete</th>
                                 <th scope="col" id="table-last" class="th-reduce">Update</th>
                             </tr>
@@ -273,13 +276,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
-    <script src="/js/customers.js"></script>
+    <script src="./js/Sale.js"></script>
 
 
-    <script>
+    <!-- <script>
         document.getElementById('user-name-txt').outerHTML = localStorage.email;
         document.getElementById('user-name').outerHTML = localStorage.email;
-    </script>
+    </script> -->
     <!-- Page level custom scripts -->
 
 
