@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.CRM.main.model.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,15 +27,14 @@ public class AuthController {
     @Autowired
     private JWTUtil jwtUtil;
     
-    @RequestMapping(value = "/api/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/login")
     public String login(@RequestBody User user){
-        /*User usLogged = userDAO.getUserByCr(user);
-        
+        User usLogged = userDAO.getUserByCr(user);
+        //System.out.println(usLogged.getEmail());
         if(usLogged != null){
-            return jwtUtil.create(String.valueOf(user.getId()), usLogged.getEmail());
+            return jwtUtil.create(String.valueOf(usLogged.getId()), usLogged.getName());
         }else{
             return "FAIL";
-        }*/
-        return "Me gusta el mondongo";
+        }   
     }
 }

@@ -30,4 +30,9 @@ public class UserController {
         user.setPassword(hash);
         userDAO.registerUser(user);
     }
+    
+    @RequestMapping(value = "/api/user/{email}", method = RequestMethod.GET)
+    public User getUserByEmail(@PathVariable String email){
+        return userDAO.getUserByEmail(email);
+    }
 }

@@ -24,15 +24,20 @@ public class UserDAOImp implements UserDAO{
         ArrayList<User> list = (ArrayList<User>) entityManager.createQuery(query).setParameter("email", user.getEmail()).
                 getResultList();
         
+        if (list.isEmpty()) {
+            return null;
+        }
+        
         String passHashed = list.get(0).getPassword();
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i);
         
         if(argon2.verify(passHashed, user.getPassword())){
             return list.get(0);
-        }else{
-            return null;
         }
+        
+        return null;
     }
+    
 
     @Override
     public void registerUser(User user) {entityManager.merge(user);}
@@ -42,5 +47,11 @@ public class UserDAOImp implements UserDAO{
         String query = "SELECT u FROM User u";
         return (List<User>)entityManager.createQuery(query).getResultList();
     }
-    
+
+    @Override
+    public User getUserByEmail(String email) {
+        String query = "SELECT u FROM User u";
+        List<User> list = (List<User>)entityManager.createQuery(query).getResultList();
+        return list.get(0);
+    }
 }

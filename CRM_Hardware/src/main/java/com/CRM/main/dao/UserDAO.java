@@ -9,4 +9,5 @@ public interface UserDAO {
     User getUserByCr(User user);
     void registerUser(User user);
     List<User> getUsers();
+    User getUserByEmail(String email);
 }
