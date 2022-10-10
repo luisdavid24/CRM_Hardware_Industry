@@ -109,7 +109,9 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                                                 
-                        <span id="user-name-txt"></span>    
+                        <div class="span-container">
+                            <span id="user-name-txt"></span>    
+                        </div>   
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -121,7 +123,7 @@
                             <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="localStorage.clear()">Logout</a></li>
                             </ul>
                         </div>
                         <!-- Nav Item - End User Information-->     
@@ -179,8 +181,8 @@
     
     
     <script>
-        document.getElementById('user-name-txt').outerHTML = localStorage.email;
-        document.getElementById('user-name').outerHTML = localStorage.email;
+        document.getElementById('user-name-txt').outerHTML = localStorage.name;
+        document.getElementById('user-name').outerHTML = localStorage.name;
     </script>
     
 </body>

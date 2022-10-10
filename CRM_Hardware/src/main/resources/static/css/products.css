@@ -58,11 +58,6 @@ tbody button{
     margin: 10px;
 }
 
-.span-container{
-    display: flex;
-    align-items: center;
-}
-
 .modal{
     font-family: var(--font-family-roboto)
 }
