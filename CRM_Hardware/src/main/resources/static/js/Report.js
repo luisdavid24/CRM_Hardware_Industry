@@ -43,7 +43,7 @@ async function loadSales() {
         labels:product,
         datasets:[
             {
-                label:"Mi grafica",
+                label:"Producto mas vendido",
                 backgroundColor:"rgb(0,0,0)",
                 data:productValue
             }
