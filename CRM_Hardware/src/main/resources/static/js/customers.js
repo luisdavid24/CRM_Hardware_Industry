@@ -1,12 +1,3 @@
-window.addEventListener("load", () =>{
-    const loader = document.querySelector(".loader");
-    loader.classList.add("loader--hidden");
-
-    loader.addEventListener("transitioned", () =>{
-        document.body.removeChild(loader);
-    })
-})
-
 $(document).ready(function () {
     loadCustomers();
 });
@@ -29,7 +20,6 @@ async function loadCustomers() {
 
     document.querySelector('#sanNumberUser1').outerHTML = customersHTML.length;
     document.querySelector('#sanNumberUser2').outerHTML = customersHTML.length;
-    alert(customersHTML.length);
 
     for (let it_customer of customersHTML) {
         btnDelete = "<button class='btn-icons' onclick=deleteCustomer(\'" + it_customer.id + "\')>\n\
