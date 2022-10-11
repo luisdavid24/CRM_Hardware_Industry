@@ -9,7 +9,7 @@ window.addEventListener("load", () =>{
 
 $(document).ready(function () {
     reportSale();
-    reportSale2();
+    reportProduct();
 });
 let colores=["#3371FF","#E6DF92","#BFF5D7","#E6CFF1",'#B833FF',"#CFD7F1","#FF33E0","#33FFF9","#9F33FF","#F1F99A","#BFF5D7"];
 let colores2=['#B833FF',"#FF33E0","#E6DF92","#BFF5D7","#E6CFF1","#3371FF","#CFD7F1","#33FFF9","#9F33FF","#F1F99A","#BFF5D7"];
@@ -26,7 +26,7 @@ async function reportSale() {
 
     const sales = await request.json();
    
-    let valores=modificarArry(sales);
+    let valores=modificarArrySale(sales);
     let product=[];
     let productValue=[];
     
@@ -42,8 +42,13 @@ async function reportSale() {
     document.getElementById('masVendidoP').innerHTML=masVendido;
     document.getElementById('menosVendidoP').innerHTML=menosVendido;
 
-
-    let miCanvas=document.getElementById("MiGrafica").getContext("2d");
+    
+    generarGraficoBarra(product,"Producto mas vendido",colores,productValue,"MiGrafica");
+    generarGraficoTorta(product,productValue,colores,'MiGrafica2');
+    
+}
+function generarGraficoBarra(product,text,colores,value,id){
+    let miCanvas=document.getElementById(id).getContext("2d");
 
     let chart=new Chart(miCanvas,{
     type:"bar",
@@ -51,24 +56,19 @@ async function reportSale() {
         labels:product,
         datasets:[
             {
-                label:"Producto mas vendido",
+                label:text,
                 backgroundColor:colores,
-                data:productValue
+                data:value
                 
             }
         ]
 
         }
     })
-    
-    
 }
 
-
-function modificarArry(array){
+function modificarArrySale(array){
     let arrayNuevo=[]
-    let arrayNuevo2=[]
-
     for (let elemento of array) {
         let condicion=arrayNuevo.indexOf(elemento.product_code);
         if(condicion===-1){
@@ -113,18 +113,40 @@ function burburja(array){
 }
 
 
-async function reportSale2() {
-    const request = await fetch('api/sale', {
+
+
+
+ function generarGraficoTorta(elemento,value,color,id) {
+    const ctx = document.getElementById(id).getContext('2d');
+    const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: elemento,
+                datasets: [{
+                    data: value,
+                    backgroundColor:color,
+                    borderColor: color,
+                    borderWidth: 1
+                }]
+            },
+            options: {}
+        });
+}
+
+
+async function reportProduct() {
+
+    const request = await fetch('api/products', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         }
     });
-
-    const sales = await request.json();
-   
-    let valores=modificarArry(sales);
+    const productsHTML = await request.json()
+    let valores=modificarProduct(productsHTML);
+    console.log(valores);
     let product=[];
     let productValue=[];
     
@@ -134,34 +156,37 @@ async function reportSale2() {
     for(let i=1;i<valores.length;i+=2){
         productValue.push(valores[i]);
     }
+    let masStock="More inventory of: "+product[0];
+    let menosStcok="Less inventory of: "+product[product.length-1];
     
+    document.getElementById('masStockP').innerHTML=masStock;
+    document.getElementById('menosStockP').innerHTML=menosStcok;
 
-        const ctx = document.getElementById('MiGrafica2').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: product,
-                datasets: [{
-                    label: '# of Votes',
-                    data: productValue,
-                    backgroundColor:colores,
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {}
-        });
+
+    generarGraficoBarra(product,"The product that has the most inventory",colores2,productValue,"MiGrafica3");
+    generarGraficoTorta(product,productValue,colores2,'MiGrafica4');
 }
 
 
+function modificarProduct(array){
+    let arrayNuevo=[]
+    for (let elemento of array) {
+        let condicion=arrayNuevo.indexOf(elemento.product_code);
+        if(condicion===-1){
+            arrayNuevo.push(elemento.name);
+            arrayNuevo.push(elemento.units);
+            
+        }else{
+            let posicion=arrayNuevo.findIndex((index)=>index==elemento.product_code);
+            let valor=arrayNuevo[posicion+1];
+            valor+=elemento.units;
+            arrayNuevo[posicion+1]=valor;
+            
+        }
 
-async function reportSale3() {
+    }
     
+    burburja(arrayNuevo);
+    
+    return arrayNuevo;
 }
