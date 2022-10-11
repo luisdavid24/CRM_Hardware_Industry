@@ -140,14 +140,11 @@ th{
     to {transform: rotate(1turn) }
 }
 
-/* css para v2 */
-
 .gallery{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 50px;
-    background-color: #000;
 }
 
 .item{

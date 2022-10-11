@@ -127,7 +127,7 @@
                             <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="#" onclick="localStorage.clear()">Logout</a></li>
+                                <li><a class="dropdown-item" href="index.html" onclick="localStorage.clear()">Logout</a></li>
                             </ul>
                         </div>     
                     </ul>
@@ -259,8 +259,8 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
-        document.getElementById('user-name-txt').outerHTML = localStorage.email;
-        document.getElementById('user-name').outerHTML = localStorage.email;
+        document.getElementById('user-name-txt').outerHTML = localStorage.name;
+        document.getElementById('user-name').outerHTML = localStorage.name;
     </script>
 
 </body>

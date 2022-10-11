@@ -26,7 +26,6 @@ async function loadProducts() {
         }
     });
     const productsHTML = await request.json();
-    console.log(productsHTML);
 
     let listHTML = '';
 

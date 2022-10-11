@@ -1,7 +1,11 @@
 $(document).ready(function () {
+    $(document).on('submit', '#pruebaForm', function() {
+        return false;
+    });
 });
 
 async function startSesion() {
+    prueba();
     let data = {};
 
     data.email = document.getElementById("exampleInputEmail1").value;
@@ -27,9 +31,24 @@ async function startSesion() {
     if (response != 'FAIL') {
         localStorage.token = response;
         getUserName(data.email);
-        // window.location.href = 'home.html';
+        window.location.href = 'home.html';
     }else{
-        alert("Credenciales invalidas")
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'warning',
+            title: 'User or password incorrect'
+        })
     }
 }
 
@@ -39,5 +58,24 @@ async function getUserName(email) {
         .then(json => localStorage.name = json.name);
 }
 
+function prueba() {
+    (() => {
+        'use strict'
+      
+        const forms = document.querySelectorAll('.needs-validation')
+      
+        Array.from(forms).forEach(form => {
+          form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+      
+            form.classList.add('was-validated')
+            return true;
+          }, false)
+        })
+    })()
+}
 
 
