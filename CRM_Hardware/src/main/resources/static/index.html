@@ -41,6 +41,7 @@
         </div>
         <iframe id="request"></iframe>
     </div>
+    <div class="loader"></div>
      
     <!-- JQuery Cores -->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -51,6 +52,17 @@
 
     <!-- Custom Alerts -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        window.addEventListener("load", () =>{
+            const loader = document.querySelector(".loader");
+            loader.classList.add("loader--hidden");
+
+            loader.addEventListener("transitioned", () =>{
+                document.body.removeChild(loader);
+            })
+        })
+    </script>
 </body>
 
 </html>
