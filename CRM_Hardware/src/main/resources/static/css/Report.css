@@ -9,7 +9,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     
 }
 .containerReport{
-    display: flex;
+    display: grid;
+    grid-auto-rows:22rem;
+    grid-template-columns: repeat(auto-fill,320px); 
     justify-content: center;
-   
 }
