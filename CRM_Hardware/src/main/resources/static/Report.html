@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sales | JDAS</title>
+    <title>Report | JDAS</title>
 
     <link rel="stylesheet" href="css/root.min.css">
     <link rel="stylesheet" href="css/customers.css">
@@ -140,6 +140,7 @@
                     </ul>
 
                 </nav>
+                <div id="containerReportMaster">
                 <div class="containerReport">
                     <!-- <div> -->
                         <div class="divReport">
@@ -186,6 +187,9 @@
                             <p id="masStockP"> </p>
                             <p id="menosStockP"></p>
                         </div>
+                        <div>
+                            <button id="btnPdf" class="btn btn-success">Generate pdf</button>
+                        </div>
 
                        
 
@@ -193,6 +197,10 @@
                  
                  
                 </div>
+                
+                    
+                </div>
+               
             
         <!-- End of Main Content -->
         <!-- Footer -->
@@ -223,6 +231,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquey/3.3.1/jquey.min.js"></script>
+    <script src="/js/printThis.js"></script>  
     <script src="/js/home.js"></script>    
     <script src="/js/Sale.js"></script>
     <script src="/js/Report.js"></script>

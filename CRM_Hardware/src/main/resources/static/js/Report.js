@@ -190,3 +190,9 @@ function modificarProduct(array){
     
     return arrayNuevo;
 }
+
+$(document).ready(function(){
+    $('#btnPdf').click(function(){
+        $('#containerReportMaster').printThis();
+    })
+})
