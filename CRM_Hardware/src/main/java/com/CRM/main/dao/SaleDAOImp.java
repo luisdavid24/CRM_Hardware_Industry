@@ -65,7 +65,7 @@ public class SaleDAOImp implements SaleDAO{
 
     @Override
     public List<String> getProductsCodes() {
-        String query = "SELECT product_code FROM Product";
+        String query = "SELECT productCode FROM Product";
         return entityManager.createQuery(query).getResultList();
     }
     

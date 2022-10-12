@@ -193,8 +193,11 @@
                                         required">
                                     <hr>
                                     <label for="input_email" class="form-label">Product code *</label>
-                                    <input type="text" class="form-control" id="input_product_code"
-                                        placeholder="AADD43" required">
+                                    <input type="text" class="form-control" list="codesList" id="input_product_code"
+                                        placeholder="Select an option" required">
+                                    <datalist id="codesList">
+
+                                    </datalist>
                                     <hr>
                                     <label for="input_phone" class="form-label">Units *</label>
                                     <input type="number" class="form-control" id="input_units" placeholder="30"required">
@@ -218,7 +221,7 @@
                            
                             
                             <div class="btn-container">
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertModal">
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertModal" onclick="loadCodes()">
                                     Add a new sale</button>
                             </div>
                         </div>

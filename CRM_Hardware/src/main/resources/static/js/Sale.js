@@ -129,13 +129,14 @@ async function loadCodes() {
         },
     })
 
-    let response = request.json();
+    let response = await request.json();
     let listHTML = "";
 
-    response.forEach(it_response => {
-        let option = "<option value="+it_response+">";
+    for (const it_resp of response) {
+        let option = "<option value="+it_resp+">";
         listHTML += option;
-    });
+    }
     
-    document.querySelector("#productCodeList").outerHTML = listHTML;
+    alert(listHTML);
+    document.querySelector("#codesList").innerHTML = listHTML;
 }
