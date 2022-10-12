@@ -116,6 +116,10 @@ th{
     margin:auto;
 }
 
+#containerTableCustomer{
+    height:47vh;
+}
+
 .th-reduce{
     width: 0.75rem!important;
 }
