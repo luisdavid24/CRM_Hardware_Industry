@@ -13,7 +13,8 @@ async function loadSales() {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         }
     });
     const sales = await request.json();
@@ -45,7 +46,8 @@ async function updateSale(id) {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         }
     });
     let saleUpdate = {};
@@ -73,7 +75,8 @@ async function deleteSale(id) {
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.token
         }
       });
     location.reload();
@@ -89,7 +92,8 @@ async function deleteSale(id) {
 function getHeaders(){
     return {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.token
         
     };
     }
@@ -136,7 +140,8 @@ async function addSale() {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.token
       },
       body: JSON.stringify(datos)
     });
@@ -155,7 +160,8 @@ async function loadCodes() {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         },
     })
 

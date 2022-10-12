@@ -191,7 +191,8 @@ async function modifyProduct() {
                 method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token
                 },
                 body: JSON.stringify({
                     price: data.price,
@@ -250,7 +251,8 @@ async function insertProduct() {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         },
         body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
     });
