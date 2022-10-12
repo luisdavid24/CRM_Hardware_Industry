@@ -18,6 +18,7 @@ import lombok.ToString;
 @ToString
 public class Customer {
     
+    // The above code is creating a table in the database.
     @Id
     @Column(name = "id") @GeneratedValue(strategy = GenerationType.AUTO )
     @Getter @Setter

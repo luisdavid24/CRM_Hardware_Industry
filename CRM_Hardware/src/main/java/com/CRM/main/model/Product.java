@@ -19,6 +19,7 @@ import lombok.ToString;
 public class Product {
     
     
+    // The above code is creating a table in the database.
     @Id @Getter @Setter @Column(name = "productCode") 
     private String productCode;
     

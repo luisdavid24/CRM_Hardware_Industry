@@ -1,3 +1,4 @@
+/* A jQuery function that is executed when the document is ready. */
 $(document).ready(function () {
     loadProducts();
     numbOfProducts();
@@ -6,6 +7,9 @@ $(document).ready(function () {
 
 let productToModify;
 
+/**
+ * It loads the products from the database and displays them in the HTML page.
+ */
 async function loadProducts() {
 
     const request = await fetch('api/products', {
@@ -45,6 +49,10 @@ async function loadProducts() {
     document.querySelector('.gallery').innerHTML = listHTML;
 }
 
+/**
+ * It's a function that deletes a product from the database.
+ * @param productCode - the product code of the product to be deleted
+ */
 async function deleteProduct(productCode) {
 
     Swal.fire({
@@ -77,6 +85,9 @@ async function deleteProduct(productCode) {
     })
 }
 
+/**
+ * It gets the number of products from the database and displays it on the page.
+ */
 async function numbOfProducts() {
     const request = await fetch('api/numbOfProducts/', {
         method: 'GET',
@@ -97,6 +108,9 @@ async function numbOfProducts() {
     document.querySelector("#numbOfProducts").innerHTML = result;
 }
 
+/**
+ * It fetches a list of products from the database and displays them on the page.
+ */
 async function popularProduct() {
     const request = await fetch('api/popularProduct/', {
         method: 'GET',
@@ -112,6 +126,11 @@ async function popularProduct() {
     document.querySelector("#popularProduct").innerHTML = response;
 }
 
+/**
+ * It takes a product code as a parameter, makes a GET request to the server, and then populates the
+ * form with the data from the server.
+ * @param productCode - the product code of the product to be modified
+ */
 async function loadData(productCode) {
     productToModify = productCode;
 
@@ -134,6 +153,10 @@ async function loadData(productCode) {
     document.getElementById('inputURL').value = productHTML.imgURL;
 }
 
+/**
+ * It takes the data from the form and sends it to the server.
+ * </code>
+ */
 async function modifyProduct() {
     const Toast = Swal.mixin({
         toast: true,
@@ -197,6 +220,9 @@ async function modifyProduct() {
     })
 }
 
+/**
+ * It takes the values from the inputs and sends them to the server.
+ */
 async function insertProduct() {
 
     const Toast = Swal.mixin({

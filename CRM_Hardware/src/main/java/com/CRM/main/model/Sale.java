@@ -23,6 +23,7 @@ import lombok.Setter;
 @Table (name = "sales")
 public class Sale {
     
+    // A JPA annotation.
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id_sale")

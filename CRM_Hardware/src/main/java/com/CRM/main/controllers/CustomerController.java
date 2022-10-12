@@ -21,25 +21,53 @@ public class CustomerController {
 @Autowired
 private CustomerDAO customerDAO;
     
+    /**
+     * This function is used to get a customer by id
+     * 
+     * @param id The id of the customer you want to get.
+     * @return A customer object
+     */
     @RequestMapping(value = "api/customer/{id}", method = RequestMethod.GET)
     public Customer getCustomer(@PathVariable int id){
         return customerDAO.getCustomerOne(id);
     }
+   /**
+    * It returns a list of customers
+    * 
+    * @return A list of customers
+    */
     @RequestMapping(value = "api/customer", method = RequestMethod.GET)
     public List<Customer> getCustomer(){
         return customerDAO.getCustomer();
     } 
     
+    /**
+     * It takes a JSON object, converts it into a Customer object, and then passes it to the DAO layer
+     * 
+     * @param customer The object that will be passed to the method.
+     */
     @RequestMapping (value = "api/customer", method = RequestMethod.POST)
     public void registerCustomer(@RequestBody Customer customer){
         customerDAO.regCustomer(customer);
     }
     
+    /**
+     * The function modCustomer takes in a Customer object and an id, and updates the Customer object
+     * in the database with the id
+     * 
+     * @param customer the object that is being passed in
+     * @param id the id of the customer to be modified
+     */
     @RequestMapping(value = "api/customer/{id}" , method = RequestMethod.PATCH)
     public void modCustomer(@RequestBody Customer customer, @PathVariable int id){
         customerDAO.modCustomer(customer, id);
     }
     
+    /**
+     * This function deletes a customer from the database
+     * 
+     * @param id The id of the customer to be deleted.
+     */
     @RequestMapping(value = "api/customer/{id}", method = RequestMethod.DELETE)
     public void deleteCustomer(@PathVariable int id){
         customerDAO.delete(id);

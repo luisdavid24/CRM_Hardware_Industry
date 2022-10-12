@@ -1,9 +1,14 @@
+/* This is a jQuery function that waits for the DOM to be ready before executing the code inside the
+function. */
 $(document).ready(function () {
     loadCustomers();
 });
 
 let customerToModify;
 
+/**
+ * It fetches a list of customers from the server, and then displays them in a table.
+ */
 async function loadCustomers() {
 
     const request = await fetch('api/customer', {
@@ -46,6 +51,11 @@ async function loadCustomers() {
 
 }
 
+/**
+ * It takes an id, makes a GET request to the server, and then populates the form with the data from
+ * the server.
+ * @param id - the id of the customer
+ */
 async function loadDataCustomer(id) {
     customerToModify = id;
 
@@ -66,6 +76,10 @@ async function loadDataCustomer(id) {
     document.getElementById("inputName").value = productHTML.name;
 }
 
+/**
+ * If the user confirms the deletion, then the customer is deleted and the page is reloaded.
+ * @param id - the id of the customer
+ */
 async function deleteCustomer(id) {
 
     Swal.fire({
@@ -98,6 +112,9 @@ async function deleteCustomer(id) {
     })
 }
 
+/**
+ * It takes the data from the form and sends it to the server.
+ */
 async function modifyCustomer() {
     const Toast = Swal.mixin({
         toast: true,
@@ -161,6 +178,9 @@ async function modifyCustomer() {
     })
 }
 
+/**
+ * It takes the data from the form and sends it to the server.
+ */
 async function insertCustomer() {
 
     const Toast = Swal.mixin({

@@ -20,16 +20,28 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public class SaleDAOImp implements SaleDAO{
     
+    // A way to inject the EntityManager into the DAO.
     @PersistenceContext
     EntityManager entityManager;
     
     
+    /**
+     * It returns a list of all the sales in the database
+     * 
+     * @return A list of Sale objects.
+     */
     @Transactional
     public List<Sale> getSale() {
         String query = "FROM Sale";
         return entityManager.createQuery(query).getResultList();
     }
    
+    /**
+     * It returns a list of sales from the database where the id is equal to the id1 parameter
+     * 
+     * @param id1 the id of the user
+     * @return A list of sales.
+     */
     @Override
      public List<Sale> getSale(int id1){
         String query = "select id_sale,date,product_code,units,value from sales where id =" + id1;
@@ -38,13 +50,23 @@ public class SaleDAOImp implements SaleDAO{
     
      
      
+    /**
+     * The function deletes a sale from the database
+     * 
+     * @param id The id of the sale to be deleted.
+     */
     @Override
     public void delete(int id) {
         Sale sale = entityManager.find(Sale.class, id);
         entityManager.remove(sale);
     }
     
-    /*insertar nuevos objetos */
+/**
+ * It takes a Sale object, and merges it with the database
+ * 
+ * @param sale The sale object to be registered.
+ */
+
     @Override
     public void regSale(Sale sale) {
         entityManager.merge(sale);
@@ -52,7 +74,13 @@ public class SaleDAOImp implements SaleDAO{
     
    
 
-    /*Modificar*/
+    
+    /**
+     * I'm trying to update a row in the database, but I'm getting an error
+     * 
+     * @param sale the object that contains the new values
+     * @param id the id of the sale to be modified
+     */
     @Override
     public void modSale(Sale sale, int id) {
         Sale temp = entityManager.find(Sale.class, id);
@@ -63,6 +91,11 @@ public class SaleDAOImp implements SaleDAO{
         entityManager.merge(temp);
     }
 
+    /**
+     * It returns a list of all the product codes in the database
+     * 
+     * @return A list of strings.
+     */
     @Override
     public List<String> getProductsCodes() {
         String query = "SELECT productCode FROM Product";

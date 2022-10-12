@@ -1,9 +1,14 @@
+/* Preventing the form from submitting. */
 $(document).ready(function () {
     $(document).on('submit', '#pruebaForm', function() {
         return false;
     });
 });
 
+/**
+ * It takes the email and password from the form, sends it to the server, and if the server returns a
+ * token, it saves it in localStorage and redirects to the home page.
+ */
 async function startSesion() {
     validation();
     let data = {};
@@ -54,12 +59,19 @@ async function startSesion() {
     }
 }
 
+/**
+ * Get the user's name from the database and store it in local storage.
+ * @param email - the email of the user
+ */
 async function getUserName(email) {
     fetch('api/user/' + email)
         .then(response => response.json())
         .then(json => localStorage.name = json.name);
 }
 
+/**
+ * If the form is not valid, prevent the default action and stop the propagation of the event.
+ */
 function validation() {
     (() => {
         'use strict'

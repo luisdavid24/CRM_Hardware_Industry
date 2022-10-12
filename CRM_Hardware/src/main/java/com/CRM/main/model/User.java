@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 public class User {
         
+    // The above code is creating a table in the database.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

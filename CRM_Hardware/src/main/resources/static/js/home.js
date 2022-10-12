@@ -55,6 +55,7 @@
   
   })(jQuery); // End of use strict
 
+/* This is a function that is being called when the page loads. It is hiding the loader. */
 window.addEventListener("load", () =>{
     const loader = document.querySelector(".loader");
     loader.classList.add("loader--hidden");
