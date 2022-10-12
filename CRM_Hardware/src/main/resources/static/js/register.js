@@ -10,6 +10,19 @@ async function registerUser() {
 
     validation();
 
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     let data = {};
     data.name = document.getElementById("inputRegisterName").value;
     data.email = document.getElementById("inputRegiterEmail").value;
@@ -17,43 +30,40 @@ async function registerUser() {
     data.password = document.getElementById("inputRegisterPassword").value;
     console.log(data);
 
-    const form = document.querySelector('.needs-validation');
-    if (form.classList.contains('was-validated')) {
-        const request = await fetch('api/users', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
-        });
-    
-        
+    console.log(data.email.includes('@elpoli.edu.co'));
 
-        if(request.status === 200){
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-    
-            Toast.fire({
-                icon: 'success',
-                title: 'User registered, please login'
-            })
-    
-            setTimeout(function () {
-                window.location.href = 'index.html'
-            }, 2000);
-            
-        }
-    }  
+    if (data.email.includes('@elpoli.edu.co')) {
+        const form = document.querySelector('.needs-validation');
+        if (form.classList.contains('was-validated')) {
+            const request = await fetch('api/users', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
+            });
+
+            if(request.status === 200){
+                Toast.fire({
+                    icon: 'success',
+                    title: 'User registered, please login'
+                })
+
+                setTimeout(function () {
+                    window.location.href = 'index.html'
+                }, 2000);
+                
+            }
+        }    
+    }else{
+        Toast.fire({
+            icon: 'warning',
+            title: 'Only users with corporate mail can be registered'
+        })
+    }
+
+      
     
 }
 
