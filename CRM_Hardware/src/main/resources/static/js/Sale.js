@@ -16,11 +16,14 @@ async function loadSales() {
     let listadoHtml = '';
     
     for (let sale of sales) {
+        let fecha=String(sale.date);
+        fecha=fecha.slice(0,10);
+        
         let botonEliminar = "<button class='btn-icons' onclick=deleteSale(" +sale.id+ ")>\n\<i class='bi bi-trash'></i>\n\</button>";
         botonEditar= "<button class='btn-icons' onclick=updateSale(" +sale.id + ") data-bs-toggle='modal' data-bs-target='#updateModal'>\n\
         <i class='bi bi-pencil'></i>\n\
         </button>";
-        let saleHtml='<tr><td> '+sale.id+' </td><td> '+sale.date+' </td><td> '+sale.product_code+' </td><td> '+sale.units+' </td><td> '+sale.value+' </td><td>'+botonEliminar+'</td><td>'+botonEditar+'</td></th></tr>';
+        let saleHtml='<tr><td> '+sale.id+' </td><td> '+fecha+' </td><td> '+sale.product_code+' </td><td> '+sale.units+' </td><td> '+sale.value+' </td><td>'+botonEliminar+'</td><td>'+botonEditar+'</td></th></tr>';
         
         listadoHtml += saleHtml;
     }
