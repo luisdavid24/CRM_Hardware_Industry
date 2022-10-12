@@ -102,9 +102,21 @@ function getHeaders(){
  * It takes the values of the inputs and sends them to the server.
  */
 async function modSale() {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     let datos = {};
     datos.id=idUpdate;
-    // datos.date = document.getElementById('txtDate');
     datos.product_code = document.getElementById('input_product_code_update').value;
     datos.units = document.getElementById('input_value_update').value;
     datos.value = document.getElementById('input_units_update').value;
@@ -122,12 +134,32 @@ async function modSale() {
             value: datos.value
         }) 
     });
-    loadSales();
+
+    Toast.fire({
+        icon: 'success',
+        title: 'Saved successfully'
+    })
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 /**
  * It takes the data from the form and sends it to the server.
  */
 async function addSale() {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     let datos = {};
     datos.date = document.getElementById('input_date').value;
     datos.product_code = document.getElementById('input_product_code').value;
@@ -145,8 +177,14 @@ async function addSale() {
       },
       body: JSON.stringify(datos)
     });
-    loadSales();
-   
+    
+    Toast.fire({
+        icon: 'success',
+        title: 'Inserted successfully'
+    })
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 
     
