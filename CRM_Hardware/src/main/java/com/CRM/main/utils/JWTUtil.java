@@ -30,10 +30,11 @@ public class JWTUtil {
     @Value("${security.jwt.ttlMillis}")
     private Long ttlMillis;
 
+   // A logger.
     private final Logger log = LoggerFactory.getLogger(JWTUtil.class);
 
     /**
-     * Crea un nuevo token
+     * Create a new token
      * @param id
      * @param subject
      * @return
@@ -62,12 +63,15 @@ public class JWTUtil {
         return builder.compact();
     }
 
-    /**
-     * Valida y lee el JWT
-     * @param jwt
-     * @return
-     */
+    
+    
 
+/**
+ * It takes a JWT and returns the value of the subject claim
+ * 
+ * @param jwt The JWT to parse.
+ * @return The subject of the JWT.
+ */
      public String getValue(String jwt){
          //Se retornara una excepción si el JWT no está añadido
          Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key))
@@ -75,6 +79,12 @@ public class JWTUtil {
          return claims.getSubject();
      }
 
+     /**
+      * The function takes a JWT as a parameter, parses it, and returns the value of the "id" claim
+      * 
+      * @param jwt The JWT to parse
+      * @return The key is being returned.
+      */
      public String getKey(String jwt){
          Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key))
                  .parseClaimsJws(jwt).getBody();

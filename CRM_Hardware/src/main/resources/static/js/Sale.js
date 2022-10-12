@@ -1,8 +1,12 @@
+/* A jQuery function that is executed when the document is ready. */
 $(document).ready(function () {
     loadSales();
 });
 
 
+/**
+ * It fetches the sales from the API, then it creates a table with the sales and adds it to the HTML.
+ */
 async function loadSales() {
     
     const request = await fetch('api/sale', {
@@ -32,6 +36,10 @@ async function loadSales() {
 }
 let idUpdate=null;
 let dateUpdate=null;
+/**
+ * It gets the data from the database and puts it in the form.
+ * @param id - the id of the sale to be updated
+ */
 async function updateSale(id) {
     const request = await fetch('api/sale', {
         method: 'GET',
@@ -55,6 +63,10 @@ async function updateSale(id) {
     document.getElementById('input_value_update').value=saleUpdate.value;
 }
 
+/**
+ * It sends a DELETE request to the server, and then reloads the page.
+ * @param id - the id of the sale to be deleted
+ */
 async function deleteSale(id) {
 
     const request = await fetch('api/sale/'+id, {
@@ -66,6 +78,14 @@ async function deleteSale(id) {
       });
     location.reload();
 }
+/**
+ * It returns an object with two key-value pairs.
+ * 
+ * The first key is 'Accept' and the value is 'application/json'.
+ * 
+ * The second key is 'Content-Type' and the value is 'application/json'.
+ * @returns an object with two properties.
+ */
 function getHeaders(){
     return {
         'Accept': 'application/json',
@@ -74,6 +94,9 @@ function getHeaders(){
     };
     }
     
+/**
+ * It takes the values of the inputs and sends them to the server.
+ */
 async function modSale() {
     let datos = {};
     datos.id=idUpdate;
@@ -97,6 +120,9 @@ async function modSale() {
     });
     loadSales();
 }
+/**
+ * It takes the data from the form and sends it to the server.
+ */
 async function addSale() {
     let datos = {};
     datos.date = document.getElementById('input_date').value;
@@ -119,6 +145,10 @@ async function addSale() {
 }
 
     
+/**
+ * It gets a list of codes from the server and then populates a select element with them.
+ * </code>
+ */
 async function loadCodes() {
     alert("Aqui");
     const request = await fetch('/api/productsCodes',{

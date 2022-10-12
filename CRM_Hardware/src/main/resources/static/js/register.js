@@ -1,3 +1,4 @@
+/* Preventing the form from being submitted. */
 $(document).ready(function () {
     $(document).on('submit', '#pruebaForm', function() {
         
@@ -6,6 +7,11 @@ $(document).ready(function () {
 });
 
 
+/**
+ * It checks if the email is from the company, if it is, it checks if the form is valid, if it is, it
+ * sends the data to the server, if the server responds with a 200 status code, it shows a toast and
+ * redirects to the login page.
+ */
 async function registerUser() {
 
     validation();
@@ -67,6 +73,10 @@ async function registerUser() {
     
 }
 
+/**
+ * If the form is not valid, prevent the default action and stop the propagation of the event.
+ * @param params - {
+ */
 function validation(params) {
     (() => {
         'use strict'

@@ -14,9 +14,18 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public class UserDAOImp implements UserDAO{
     
+    // A JPA annotation that injects an EntityManager instance into the class.
     @PersistenceContext
     EntityManager entityManager;
     
+    /**
+     * It takes a user object, checks if the email exists in the database, if it does, it hashes the
+     * password and compares it to the hashed password in the database. If it matches, it returns the
+     * user object
+     * 
+     * @param user the user object that is passed in from the controller
+     * @return The user object is being returned.
+     */
     @Override
     public User getUserByCr(User user) {
         String query = "SELECT u FROM User u WHERE u.email = :email";
@@ -39,15 +48,31 @@ public class UserDAOImp implements UserDAO{
     }
     
 
+    /**
+     * It registers a user.
+     * 
+     * @param user the user object that is being registered
+     */
     @Override
     public void registerUser(User user) {entityManager.merge(user);}
 
+    /**
+     * This function returns a list of all users in the database.
+     * 
+     * @return A list of users.
+     */
     @Override
     public List<User> getUsers() {
         String query = "SELECT u FROM User u";
         return (List<User>)entityManager.createQuery(query).getResultList();
     }
 
+    /**
+     * Get the user by email
+     * 
+     * @param email test@test.com
+     * @return A list of users.
+     */
     @Override
     public User getUserByEmail(String email) {
         String query = "SELECT u FROM User u";

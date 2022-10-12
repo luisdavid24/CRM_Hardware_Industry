@@ -46,6 +46,15 @@
 ;
 (function($) {
 
+    /**
+     * If the content is a jQuery object, clone it and append it to the element, otherwise just append
+     * the content.
+     * @param  - The element to append the content to.
+     * @param content - The content to be appended to the element. Can be an HTML string, DOM element,
+     * text node, array of elements and text nodes, or jQuery object. The function can be passed a
+     * selector expression, in which case all the contents of the specified element will be inserted.
+     * @returns The content is being returned.
+     */
     function appendContent($el, content) {
         if (!content) return;
 
@@ -53,6 +62,13 @@
         $el.append(content.jquery ? content.clone() : content);
     }
 
+    /**
+     * Clone for safety and convenience, copy original select and textarea values to their cloned
+     * counterpart, remove scripts, and append to body.
+     * @param  - The body of the document.
+     * @param  - The element to be printed.
+     * @param opt - {
+     */
     function appendBody($body, $element, opt) {
         // Clone for safety and convenience
         // Calls clone(withDataAndEvents = true) to copy form values.
@@ -80,6 +96,24 @@
     }
 
     // Copies values from origin to clone for passed in elementSelector
+    /**
+     * "For each element in the clone that matches the elementSelector, set its value to the value of
+     * the corresponding element in the origin."
+     * 
+     * The function is called like this:
+     * 
+     * copyValues($('#origin'), $('#clone'), 'input[type=text]');
+     * 
+     * The first parameter is the origin element, the second is the clone element, and the third is the
+     * element selector.
+     * 
+     * The function is called in the click handler for the "Copy" button.
+     * 
+     * The function is called again in the click handler for the "Reset" button.
+     * @param origin - The original element that you want to copy the values from.
+     * @param clone - The cloned element
+     * @param elementSelector - The selector for the elements you want to copy the values from.
+     */
     function copyValues(origin, clone, elementSelector) {
         var $originalElements = origin.find(elementSelector);
 
@@ -89,6 +123,8 @@
     }
 
     var opt;
+    /* Creating a new iframe and appending it to the body. */
+    /* Creating a new iframe and appending it to the body. */
     $.fn.printThis = function(options) {
         opt = $.extend({}, $.fn.printThis.defaults, options);
         var $element = this instanceof jQuery ? this : $(this);
@@ -324,6 +360,7 @@
     };
 
     // defaults
+    /* Setting the default values for the plugin. */
     $.fn.printThis.defaults = {
         debug: false,                       // show the iframe for debugging
         importCSS: true,                    // import parent page css

@@ -31,29 +31,49 @@ public class SaleController {
     @Autowired
     private JWTUtil jwtUtil;*/
     
+    // A method that returns a list of sales.
     @RequestMapping(value = "api/sale/{id}", method = RequestMethod.GET)
     public List<Sale> getSale(@PathVariable int id){
         return saleDAO.getSale(id);
     }
+    // A method that returns a list of sales.
     @RequestMapping(value = "api/sale", method = RequestMethod.GET)
     public List<Sale> getSale() {
        return saleDAO.getSale();
     }
     
+    // A method that returns a list of products codes.
     @RequestMapping(value = "/api/productsCodes", method = RequestMethod.GET)
     public List<String> getProductsCodes(){return saleDAO.getProductsCodes();};
     
+    /**
+     * It takes a JSON object, transforms it into a Sale object, and then saves it to the database
+     * 
+     * @param sale the object that is being sent to the server
+     */
     @RequestMapping(value = "api/sale", method = RequestMethod.POST)
     public void registerSale(@RequestBody Sale sale){ //Transforma json en un Usuario
         saleDAO.regSale(sale);
     }
     
+    /**
+     * This function deletes a sale from the database
+     * 
+     * @param id The id of the sale you want to delete
+     */
     @RequestMapping(value = "api/sale/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable int id){
         saleDAO.delete(id);
     }
     
     
+    /**
+     * It takes a JSON object, transforms it into a Sale object, and then updates the database with the
+     * new Sale object
+     * 
+     * @param sale is the object that is going to be modified
+     * @param id The id of the sale to be modified
+     */
     @RequestMapping(value = "api/sale/{id}", method = RequestMethod.PATCH)
     public void modSale(@RequestBody Sale sale, @PathVariable int id){ //Transforma json en un Usuario
          saleDAO.modSale(sale, id);
