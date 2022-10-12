@@ -20,7 +20,7 @@ public class Customer {
     
     // The above code is creating a table in the database.
     @Id
-    @Column(name = "id") @GeneratedValue(strategy = GenerationType.AUTO )
+    @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
     private int id;
     
