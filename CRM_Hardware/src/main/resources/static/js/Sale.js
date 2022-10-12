@@ -155,7 +155,6 @@ async function addSale() {
  * </code>
  */
 async function loadCodes() {
-    alert("Aqui");
     const request = await fetch('/api/productsCodes',{
         method: 'GET',
         headers: {
@@ -173,6 +172,5 @@ async function loadCodes() {
         listHTML += option;
     }
     
-    alert(listHTML);
     document.querySelector("#codesList").innerHTML = listHTML;
 }
