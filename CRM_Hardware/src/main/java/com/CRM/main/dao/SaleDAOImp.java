@@ -62,10 +62,12 @@ public class SaleDAOImp implements SaleDAO{
         temp.setValue(sale.getValue());
         entityManager.merge(temp);
     }
-    
-    
-    
-    
+
+    @Override
+    public List<String> getProductsCodes() {
+        String query = "SELECT product_code FROM Product";
+        return entityManager.createQuery(query).getResultList();
+    }
     
     
 }

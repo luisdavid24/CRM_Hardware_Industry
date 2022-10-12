@@ -114,5 +114,25 @@ async function addSale() {
     loadSales();
    
 }
-    
 
+    
+async function loadCodes() {
+    alert("Aqui");
+    const request = await fetch('/api/productsCodes',{
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+
+    let response = request.json();
+    let listHTML = "";
+
+    response.forEach(it_response => {
+        let option = "<option value="+it_response+">";
+        listHTML += option;
+    });
+    
+    document.querySelector("#productCodeList").outerHTML = listHTML;
+}

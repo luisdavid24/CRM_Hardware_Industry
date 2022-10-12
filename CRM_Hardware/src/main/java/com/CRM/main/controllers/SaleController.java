@@ -40,7 +40,8 @@ public class SaleController {
        return saleDAO.getSale();
     }
     
-   
+    @RequestMapping(value = "/api/productsCodes", method = RequestMethod.GET)
+    public List<String> getProductsCodes(){return saleDAO.getProductsCodes();};
     
     @RequestMapping(value = "api/sale", method = RequestMethod.POST)
     public void registerSale(@RequestBody Sale sale){ //Transforma json en un Usuario

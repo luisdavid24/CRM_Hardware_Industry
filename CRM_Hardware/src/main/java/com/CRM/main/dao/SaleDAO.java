@@ -19,10 +19,11 @@ public interface SaleDAO{
 
     void regSale(Sale sale);
 
-   void modSale(Sale sale, int id);
+    void modSale(Sale sale, int id);
     
     List<Sale> getSale(int id);
     
+    List<String> getProductsCodes();
     
     
 }

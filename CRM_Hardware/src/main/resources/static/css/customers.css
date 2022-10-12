@@ -127,3 +127,9 @@ th{
 .btn-icons{
     border:0px!important;
 }
+
+.with-icon{
+    padding-left: 25px;
+    background: url("/imgs/iconU.png");
+    background-size: 20px;
+}
