@@ -26,7 +26,7 @@ async function reportSale() {
 
     const sales = await request.json();
    
-    let valores=modificarArrySale(sales);
+    let valores=updateArrySale(sales);
     let product=[];
     let productValue=[];
     
@@ -43,11 +43,11 @@ async function reportSale() {
     document.getElementById('menosVendidoP').innerHTML=menosVendido;
 
     
-    generarGraficoBarra(product,"Producto mas vendido",colores,productValue,"MiGrafica");
-    generarGraficoTorta(product,productValue,colores,'MiGrafica2');
+    generateBarChart(product,"Producto mas vendido",colores,productValue,"MiGrafica");
+    generateBarPie(product,productValue,colores,'MiGrafica2');
     
 }
-function generarGraficoBarra(product,text,colores,value,id){
+function generateBarChart(product,text,colores,value,id){
     let miCanvas=document.getElementById(id).getContext("2d");
 
     let chart=new Chart(miCanvas,{
@@ -67,27 +67,27 @@ function generarGraficoBarra(product,text,colores,value,id){
     })
 }
 
-function modificarArrySale(array){
-    let arrayNuevo=[]
+function updateArrySale(array){
+    let arrayNew=[]
     for (let elemento of array) {
-        let condicion=arrayNuevo.indexOf(elemento.product_code);
+        let condicion=arrayNew.indexOf(elemento.product_code);
         if(condicion===-1){
-            arrayNuevo.push(elemento.product_code);
-            arrayNuevo.push(elemento.units);
+            arrayNew.push(elemento.product_code);
+            arrayNew.push(elemento.units);
             
         }else{
-            let posicion=arrayNuevo.findIndex((index)=>index==elemento.product_code);
-            let valor=arrayNuevo[posicion+1];
+            let posicion=arrayNew.findIndex((index)=>index==elemento.product_code);
+            let valor=arrayNew[posicion+1];
             valor+=elemento.units;
-            arrayNuevo[posicion+1]=valor;
+            arrayNew[posicion+1]=valor;
             
         }
 
     }
     
-    burburja(arrayNuevo);
+    burburja(arrayNew);
     
-    return arrayNuevo;
+    return arrayNew;
 }
 function burburja(array){
     
@@ -116,7 +116,7 @@ function burburja(array){
 
 
 
- function generarGraficoTorta(elemento,value,color,id) {
+ function generateBarPie(elemento,value,color,id) {
     const ctx = document.getElementById(id).getContext('2d');
     const myChart = new Chart(ctx, {
             type: 'pie',
@@ -145,7 +145,7 @@ async function reportProduct() {
         }
     });
     const productsHTML = await request.json()
-    let valores=modificarProduct(productsHTML);
+    let valores=modifyArray(productsHTML);
     console.log(valores);
     let product=[];
     let productValue=[];
@@ -163,32 +163,32 @@ async function reportProduct() {
     document.getElementById('menosStockP').innerHTML=menosStcok;
 
 
-    generarGraficoBarra(product,"The product that has the most inventory",colores2,productValue,"MiGrafica3");
-    generarGraficoTorta(product,productValue,colores2,'MiGrafica4');
+    generateBarChart(product,"The product that has the most inventory",colores2,productValue,"MiGrafica3");
+    generateBarPie(product,productValue,colores2,'MiGrafica4');
 }
 
 
-function modificarProduct(array){
-    let arrayNuevo=[]
+function modifyArray(array){
+    let arrayNew=[]
     for (let elemento of array) {
-        let condicion=arrayNuevo.indexOf(elemento.product_code);
+        let condicion=arrayNew.indexOf(elemento.product_code);
         if(condicion===-1){
-            arrayNuevo.push(elemento.name);
-            arrayNuevo.push(elemento.units);
+            arrayNew.push(elemento.name);
+            arrayNew.push(elemento.units);
             
         }else{
-            let posicion=arrayNuevo.findIndex((index)=>index==elemento.product_code);
-            let valor=arrayNuevo[posicion+1];
+            let posicion=arrayNew.findIndex((index)=>index==elemento.product_code);
+            let valor=arrayNew[posicion+1];
             valor+=elemento.units;
-            arrayNuevo[posicion+1]=valor;
+            arrayNew[posicion+1]=valor;
             
         }
 
     }
     
-    burburja(arrayNuevo);
+    burburja(arrayNew);
     
-    return arrayNuevo;
+    return arrayNew;
 }
 
 $(document).ready(function(){
