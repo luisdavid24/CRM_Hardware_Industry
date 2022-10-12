@@ -2,6 +2,7 @@ package com.CRM.main.controllers;
 
 import com.CRM.main.dao.ProductDAO;
 import com.CRM.main.model.Product;
+import com.CRM.main.utils.JWTUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,21 @@ public class ProductController {
     @Autowired
     private ProductDAO productDAO;
     
+    @Autowired
+    private JWTUtil jwtUtil;
+    
     /**
      * The function is called getProducts() and it returns a list of products
      * 
      * @return A list of products
      */
     @RequestMapping(value = "/api/products", method = RequestMethod.GET)
-    public List<Product> getProducts(){return productDAO.getProducts();}
+    public List<Product> getProducts(@RequestHeader(value = "Authorization") String token){
+        if (verifyToken(token)) {
+            return null;
+        }
+        return productDAO.getProducts();
+    }
     
     /**
      * The function is called insertProduct, it takes a Product object as a parameter, and it calls the
@@ -78,5 +87,9 @@ public class ProductController {
      */
     @RequestMapping(value = "/api/popularProduct", method = RequestMethod.GET)
     public String getPopularProduct(){return productDAO.getPopularProduct();}
+    
+    private boolean verifyToken(String token){
+        return jwtUtil.getKey(token) == null;
+    }
     
 }

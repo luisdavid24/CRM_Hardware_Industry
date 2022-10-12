@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.CRM.main.dao.SaleDAO;
+import com.CRM.main.utils.JWTUtil;
 
 /**
  *
@@ -26,10 +27,9 @@ import com.CRM.main.dao.SaleDAO;
 public class SaleController {
     @Autowired //Hace que la clase UDAOImpl cree un objeto y lo guarda
     private SaleDAO saleDAO;
-
-    /*Esto que o que
+    
     @Autowired
-    private JWTUtil jwtUtil;*/
+    private JWTUtil jwtUtil;
     
     // A method that returns a list of sales.
     @RequestMapping(value = "api/sale/{id}", method = RequestMethod.GET)
@@ -38,7 +38,10 @@ public class SaleController {
     }
     // A method that returns a list of sales.
     @RequestMapping(value = "api/sale", method = RequestMethod.GET)
-    public List<Sale> getSale() {
+    public List<Sale> getSale(@RequestHeader(value = "Authorization") String token) {
+        if (verifyToken(token)) {
+            return null;
+        }
        return saleDAO.getSale();
     }
     
@@ -79,4 +82,7 @@ public class SaleController {
          saleDAO.modSale(sale, id);
     }
     
+    private boolean verifyToken(String token){
+        return jwtUtil.getKey(token) == null;
+    }
 }

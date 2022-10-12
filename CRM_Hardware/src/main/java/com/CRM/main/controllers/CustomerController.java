@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.CRM.main.dao.CustomerDAO;
+import com.CRM.main.utils.JWTUtil;
 /**
  *
  * @author seang
@@ -20,6 +21,9 @@ import com.CRM.main.dao.CustomerDAO;
 public class CustomerController {
 @Autowired
 private CustomerDAO customerDAO;
+
+@Autowired
+private JWTUtil jwtUtil;
     
     /**
      * This function is used to get a customer by id
@@ -37,9 +41,17 @@ private CustomerDAO customerDAO;
     * @return A list of customers
     */
     @RequestMapping(value = "api/customer", method = RequestMethod.GET)
-    public List<Customer> getCustomer(){
+    public List<Customer> getCustomer(@RequestHeader(value = "Authorization") String token){
+        if (verifyToken(token)) {
+            return null;
+        }
+        
         return customerDAO.getCustomer();
     } 
+    
+    private boolean verifyToken(String token){
+        return jwtUtil.getKey(token) == null;
+    }
     
     /**
      * It takes a JSON object, converts it into a Customer object, and then passes it to the DAO layer
