@@ -17,6 +17,14 @@ input{
     margin: 0 20px;
 }
 
+#numbOfProducts{
+    font-size: 30px;
+}
+
+#popularProduct{
+    font-size: 20px;
+}
+
 .card {
     display: flex;
     flex-direction: row;
@@ -111,20 +119,18 @@ th{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 50px;
+    margin: 5px;
 }
 
 .item{
-    /* width: 40%; */
     background-color: #E1E2EF;
     box-sizing: border-box;
     float: left;
     text-align: center;
     justify-content: center;
     border-radius: 20px;
-    /* cursor: pointer; */
     transition: all 400ms ease;
-    margin: 25px;
+    margin: 10px;
 }
 
 .item:hover{

@@ -2,6 +2,7 @@ package com.CRM.main.dao;
 
 import com.CRM.main.model.Product;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,20 @@ public class ProductDAOImp implements ProductDAO{
     @Override
     public Product getProduct(String productCode) {
         return entityManager.find(Product.class, productCode);
+    }
+
+    @Override
+    public List<Integer> getNumbOfProducts() {
+        String query = "SELECT p.units FROM Product p";
+        return entityManager.createQuery(query).getResultList();
+    }
+    
+    @Override
+    public String getPopularProduct(){
+        String query = "SELECT p.name FROM Product p ORDER BY RAND()";
+        Random rnd = new Random();
+        int size = entityManager.createQuery(query).getResultList().size();
+        return (String)entityManager.createQuery(query).getResultList().get(rnd.nextInt(size));
     }
 
 

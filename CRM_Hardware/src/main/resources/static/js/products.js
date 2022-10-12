@@ -1,5 +1,7 @@
 $(document).ready(function () {
     loadProducts();
+    numbOfProducts();
+    popularProduct();
 });
 
 let productToModify;
@@ -40,8 +42,7 @@ async function loadProducts() {
         listHTML += productHTML;
     }
 
-    document.querySelector('.gallery').outerHTML = listHTML;
-
+    document.querySelector('.gallery').innerHTML = listHTML;
 }
 
 async function deleteProduct(productCode) {
@@ -76,7 +77,40 @@ async function deleteProduct(productCode) {
     })
 }
 
+async function numbOfProducts() {
+    const request = await fetch('api/numbOfProducts/', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        }
+    });
 
+    let response = await request.json();
+    let result = 0;
+
+    for (const iterator of response) {
+        result += parseInt(iterator);
+    }
+
+    document.querySelector("#numbOfProducts").innerHTML = result;
+}
+
+async function popularProduct() {
+    const request = await fetch('api/popularProduct/', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        }
+    });
+
+    let response = await request.text();
+
+    document.querySelector("#popularProduct").innerHTML = response;
+}
 
 async function loadData(productCode) {
     productToModify = productCode;

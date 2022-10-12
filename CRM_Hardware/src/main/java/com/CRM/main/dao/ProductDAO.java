@@ -13,4 +13,6 @@ public interface ProductDAO {
     void modifyProduct(Product product, String productCode);
     List<Product> getProducts();
     Product getProduct(String productCode);
+    List<Integer> getNumbOfProducts();
+    String getPopularProduct();
 }

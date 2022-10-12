@@ -31,4 +31,10 @@ public class ProductController {
     @RequestMapping(value = "/api/product/{productCode}", method = RequestMethod.GET)
     public Product getProduct(@PathVariable String productCode){return productDAO.getProduct(productCode);}
     
+    @RequestMapping(value = "/api/numbOfProducts", method = RequestMethod.GET)
+    public List<Integer> getNumbOfProducts(){return productDAO.getNumbOfProducts();}
+    
+    @RequestMapping(value = "/api/popularProduct", method = RequestMethod.GET)
+    public String getPopularProduct(){return productDAO.getPopularProduct();}
+    
 }
