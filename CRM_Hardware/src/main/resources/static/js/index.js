@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 
 async function startSesion() {
-    prueba();
+    validation();
     let data = {};
 
     data.email = document.getElementById("exampleInputEmail1").value;
@@ -31,7 +31,9 @@ async function startSesion() {
     if (response != 'FAIL') {
         localStorage.token = response;
         getUserName(data.email);
-        window.location.href = 'home.html';
+        setTimeout(function () {
+            window.location.href = 'home.html'
+        }, 1000);
     }else{
         const Toast = Swal.mixin({
             toast: true,
@@ -58,7 +60,7 @@ async function getUserName(email) {
         .then(json => localStorage.name = json.name);
 }
 
-function prueba() {
+function validation() {
     (() => {
         'use strict'
       

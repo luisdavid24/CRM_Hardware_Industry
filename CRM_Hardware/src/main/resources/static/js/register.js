@@ -1,24 +1,78 @@
 $(document).ready(function () {
+    $(document).on('submit', '#pruebaForm', function() {
+        
+        return false;
+    });
 });
 
 
 async function registerUser() {
-    alert("Sexooo");
+
+    validation();
+
     let data = {};
-    data.name = document.getElementById("exampleInputName").value;
-    data.email = document.getElementById("exampleInputEmail").value;
-    data.phone = document.getElementById("exampleInputPhoneNumber").value;
-    data.password = document.getElementById("exampleInputPassword1").value;
+    data.name = document.getElementById("inputRegisterName").value;
+    data.email = document.getElementById("inputRegiterEmail").value;
+    data.phone = document.getElementById("inputRegisterNumber").value;
+    data.password = document.getElementById("inputRegisterPassword").value;
     console.log(data);
 
+    const form = document.querySelector('.needs-validation');
+    if (form.classList.contains('was-validated')) {
+        const request = await fetch('api/users', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
+        });
+    
+        
 
-    const request = await fetch('api/users', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
-    });
+        if(request.status === 200){
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+    
+            Toast.fire({
+                icon: 'success',
+                title: 'User registered, please login'
+            })
+    
+            setTimeout(function () {
+                window.location.href = 'index.html'
+            }, 2000);
+            
+        }
+    }  
+    
 }
 
+function validation(params) {
+    (() => {
+        'use strict'
+      
+        const forms = document.querySelectorAll('.needs-validation')
+      
+        Array.from(forms).forEach(form => {
+          form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+      
+            form.classList.add('was-validated')
+            return true;
+          }, false)
+        })
+    })()
+}
