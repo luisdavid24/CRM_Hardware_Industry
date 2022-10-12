@@ -10,7 +10,8 @@ async function loadCustomers() {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         }
     });
     const customersHTML = await request.json();
@@ -52,7 +53,8 @@ async function loadDataCustomer(id) {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         }
     });
 
@@ -80,7 +82,8 @@ async function deleteCustomer(id) {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token
                 }
             });
             Swal.fire(
@@ -129,7 +132,8 @@ async function modifyCustomer() {
                 method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token
                 },
                 body: JSON.stringify({
                     name: data.name,
@@ -181,7 +185,8 @@ async function insertCustomer() {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
         },
         body: JSON.stringify(data) //La función agarra un objeto de js y lo transforma a JSON
     });
