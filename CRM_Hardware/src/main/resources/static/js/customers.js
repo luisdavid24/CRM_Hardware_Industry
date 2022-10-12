@@ -213,7 +213,7 @@ async function insertCustomer() {
 
     Toast.fire({
         icon: 'success',
-        title: 'Product Inserted successfully'
+        title: 'Customer Inserted successfully'
     })
     setTimeout(function () {
         location.reload();
